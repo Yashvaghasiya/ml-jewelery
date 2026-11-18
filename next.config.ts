@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   images: { formats: ["image/avif", "image/webp"] },
+  experimental: { agentUpgrade: "security" },
 };
 
 export default nextConfig;
