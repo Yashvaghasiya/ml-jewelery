@@ -73,6 +73,7 @@ These rules keep the site looking deliberate and premium rather than templated. 
 - **Hero:** label, headline, one sentence, one pill CTA ("Start a project") and a quiet "See the work" link; the pendant ring sits to the right on desktop.
 - **The studio:** centred tagline that fills in word by word as you scroll.
 - **Services:** pill tabs, then one chapter per service: sticky copy on the left, its work on the right. The photo arrangement follows the service (`layout` in `lib/site.ts`): gallery, 9:16 reels, a 3 × 3 feed, or portrait cards.
+  - **Scroll motion:** the pill tabs float at the top of the section and mark the chapter in view. Each photo is unveiled upward (a sheet of ivory lifts away) and settles from a 1.15 zoom, then drifts about 5% inside its frame. In two column layouts the second column moves at its own pace, the middle reel moves against the outer two, and the feed arrives as a diagonal wave. Titles rise from a mask, the text follows in a short stagger, and a hairline under each chapter label fills as you read. With reduced motion, photos and text only fade in and nothing drifts.
 - **In numbers:** four round badges.
 - **Process:** four rounded cards.
 - **Clients:** one centred quote, with round arrow buttons and dots.
