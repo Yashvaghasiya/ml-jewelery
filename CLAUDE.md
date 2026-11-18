@@ -12,4 +12,6 @@ The owner chose to apply the skill **selectively**. These brand decisions overri
 - **No 3D.** The owner removed the 3D jewellery and the 3D camera. The hero is a real pendant photo inside a turning ring of work photos, and all work is shown as photography.
 - **Display sizes:** may use fluid `clamp()` sizes. Body and UI text must land on the Tailwind type scale.
 
+Layout, spacing, photo presentation, buttons and motion also draw on the Apple and Oura analyses in `docs/design-references/` (from VoltAgent/awesome-design-md, MIT). The owner chose these as references only: their fonts, colours and dark sections are not used. See `DESIGN.md` section 7.
+
 Everything else in the skill applies, including copy, spacing, motion curve, states, ship requirements and "never invent facts". Content in `lib/site.ts` flagged as sample stays marked until the owner supplies real figures.

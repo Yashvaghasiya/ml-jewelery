@@ -8,7 +8,7 @@ A Next.js site for a jewellery marketing studio, in a Pantone-matched ivory, cha
 - Clicking a photo, or "See our work", opens a full-screen viewer of the work.
 
 **Below the hero:**
-- a scroll-driven services journey;
+- services as editorial chapters, each with its own work;
 - results, process, testimonials and FAQ sections;
 - a contact form that sends the brief to WhatsApp.
 

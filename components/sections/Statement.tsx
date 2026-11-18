@@ -2,7 +2,6 @@
 
 import { cubicBezier, motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { site } from "@/lib/site";
 import { SectionLabel } from "@/components/ui/Reveal";
 
 const TEXT =
@@ -30,15 +29,10 @@ export default function Statement() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches), []);
   return (
-    <section data-header="light" className="bg-ivory py-[clamp(96px,14vw,200px)]">
-      <div className="container-x grid gap-10 md:grid-cols-12">
-        <div className="md:col-span-3">
-          <SectionLabel no="01">The studio</SectionLabel>
-          <p className="mt-6 max-w-64 text-sm text-taupe">
-            {site.brand} has photographed jewellery for {new Date().getFullYear() - site.since} years: bridal houses, diamond brands and family jewellers.
-          </p>
-        </div>
-        <p ref={ref} className="display text-[clamp(2rem,4.4vw,4.4rem)] leading-[1.08] md:col-span-9">
+    <section data-header="light" className="section">
+      <div className="container-x flex flex-col items-center text-center">
+        <SectionLabel no="01">The studio</SectionLabel>
+        <p ref={ref} className="display display-lg mt-10 max-w-5xl leading-[1.08]">
           {reduced
             ? words.map((w, i) => {
                 const bare = w.replace(/[^a-z]/gi, "").toLowerCase();

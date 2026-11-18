@@ -45,11 +45,11 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" data-header="light" className="relative border-t border-line-light py-[clamp(88px,11vw,160px)] text-ink">
+    <section id="contact" data-header="light" className="section relative border-t border-line-light text-ink">
       <div className="container-x grid gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <SectionLabel no="07">Start a project</SectionLabel>
-          <h2 className="display mt-6 text-[clamp(2.8rem,6vw,6rem)]">
+          <h2 className="display display-xl mt-6">
             <MaskLines lines={["Let’s make it", <em key="e" className="text-taupe">impossible</em>, "to scroll past."]} />
           </h2>
           <Reveal>
@@ -85,7 +85,7 @@ export default function Contact() {
         <Reveal className="lg:col-span-6 lg:col-start-7" delay={0.1}>
           <form
             noValidate
-            className="grid gap-9"
+            className="grid gap-9 rounded-4xl border border-line-light p-6 sm:p-10"
             onSubmit={(ev) => {
               ev.preventDefault();
               const form = ev.currentTarget;
@@ -164,7 +164,7 @@ export default function Contact() {
             <div className="flex flex-wrap items-center gap-6">
               <button
                 type="submit"
-                className="inline-flex min-h-13 items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-base font-semibold text-ivory transition-[background-color,transform] hover:bg-onyx active:scale-[0.98]"
+                className="btn btn-primary"
               >
                 Send brief on WhatsApp
                 <ArrowRightIcon weight="bold" className="h-4 w-4" aria-hidden />

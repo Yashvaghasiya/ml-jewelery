@@ -72,7 +72,7 @@ export const heroPendant = images.heroPendant;
 
 /* --------------------------------------------------------------------------
    Services journey: each service is a stop in the scroll-driven section,
-   shown with the kind of work it produces (`layout` picks the mockup).
+   shown with the kind of work it produces (`layout` picks how its photos are arranged).
    Photos come from lib/images.ts → images.services (files in /public/images/services/).
    -------------------------------------------------------------------------- */
 export type Shot = { src: string; alt?: string; label?: string };

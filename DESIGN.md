@@ -49,10 +49,13 @@ These rules keep the site looking deliberate and premium rather than templated. 
 - **Scale:** headlines use `clamp()` so they grow smoothly from 375px to 1440px with no breakpoint jumps.
 
 ## 3. Layout and spacing
-- A 12-column grid with asymmetric splits (3/9, 5/7, 7/4). Avoid centring everything.
-- Section padding is `clamp(88px, 11vw, 160px)`. Gutters are `clamp(16px, 4vw, 56px)`.
-- Use hairline rules (`line-light`/`line-dark`) instead of boxes and shadows. Corners are sharp (2px), apart from pill buttons.
-- Touch targets are at least 44 × 44px, and there's no horizontal scroll at 375px.
+- A 12-column grid with asymmetric splits (5/7, 7/4, 4/7). Statement moments (the tagline, the numbers, the client quote) are centred, like a single piece on a gallery wall; everything else is left aligned.
+- Section padding is the `.section` class: `clamp(96px, 12vw, 176px)`. Empty ivory is structure, so sections get long, calm gaps. Gutters are `clamp(16px, 4vw, 56px)`.
+- Sections are separated by a full-width hairline (`line-light`), never by a colour band.
+- **Radius scale:** photos `rounded-3xl` (24px); large cards (process steps, the enquiry form) `rounded-4xl` (32px); buttons, chips and number badges fully round. Hero ring tiles keep their own 24% radius.
+- **Buttons:** one pill grammar. `.btn .btn-primary` (ink fill) is the single action per view; secondary actions are an underlined text link or `.btn-secondary` (outline). Section navigation uses `.chip` pill tabs.
+- **Shadow:** exactly one, `.product-shadow`, under the hero pendant. Cards, buttons and photos are flat.
+- Touch targets are at least 44 × 44px, and there's no horizontal scroll at 390px.
 
 ## 4. Motion
 - **Easing:** `cubic-bezier(0.22, 1, 0.36, 1)` (`--ease-luxe`, also Tailwind's default transition curve). Reveals rise 32px over 0.7s; hover colour changes take 300ms, never under 200ms.
@@ -66,5 +69,21 @@ These rules keep the site looking deliberate and premium rather than templated. 
 - There is no 3D on the site. 3D jewellery and the 3D camera were removed at the owner's request, and the work is shown as real photography.
 - The layout was inspired by the "Lumière" concept on getlayers.ai. It is an original implementation in this site's palette and copy, not a copy of that paid template.
 
-## 6. Things to avoid (they make a site look generic or AI-made)
+## 6. Sections
+- **Hero:** label, headline, one sentence, one pill CTA ("Start a project") and a quiet "See the work" link; the pendant ring sits to the right on desktop.
+- **The studio:** centred tagline that fills in word by word as you scroll.
+- **Services:** pill tabs, then one chapter per service: sticky copy on the left, its work on the right. The photo arrangement follows the service (`layout` in `lib/site.ts`): gallery, 9:16 reels, a 3 × 3 feed, or portrait cards.
+- **In numbers:** four round badges.
+- **Process:** four rounded cards.
+- **Clients:** one centred quote, with round arrow buttons and dots.
+- **FAQ** and **Contact:** two columns; the form sits in a rounded card.
+
+## 7. References
+Layout, spacing, photo presentation, buttons and motion draw on two analyses from [awesome-design-md](https://github.com/VoltAgent/awesome-design-md), saved in `docs/design-references/`:
+- **Apple:** photography first, lots of air, one pill action, one shadow for the product, press state `scale(0.98)`.
+- **Oura:** warm paper canvas, large serif display with a quiet sans, rounded cards, pill tabs, round stat badges.
+
+Not taken from them: their fonts, their blue action colour, Apple's dark tiles and Oura's dark footer. Verdane keeps Instrument Serif + Manrope, the Pantone palette and the all-ivory page.
+
+## 8. Things to avoid (they make a site look generic or AI-made)
 Glassmorphism cards, purple/blue gradient blobs, emoji icons, centred text everywhere, stock "rocket" illustrations, more than one accent colour per section, and drop shadows on everything.

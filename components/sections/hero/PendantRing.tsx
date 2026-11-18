@@ -98,7 +98,7 @@ export default function PendantRing({ scrollTurn, reduced, onOpen }: { scrollTur
         {/* Bail */}
         <span className="-mb-1 h-[3.5%] w-[3%] rounded-full border-2 border-champagne-deep" aria-hidden />
         {/* Medallion: a real photo in a double champagne frame */}
-        <div className="relative aspect-square w-[34%] rounded-full bg-gradient-to-b from-champagne to-champagne-deep p-[2.2%] shadow-[0_24px_50px_-20px_rgb(34_34_35/0.55)]">
+        <div className="relative aspect-square w-[34%] rounded-full bg-gradient-to-b from-champagne to-champagne-deep p-[2.2%] product-shadow">
           <div className="relative h-full w-full overflow-hidden rounded-full ring-1 ring-ivory/70">
             <Image src={heroPendant.src} alt={heroPendant.alt} fill priority sizes="(min-width: 1024px) 200px, 34vw" className="object-cover" />
           </div>

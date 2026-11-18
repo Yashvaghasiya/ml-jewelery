@@ -1,6 +1,5 @@
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
-import Marquee from "@/components/sections/Marquee";
 import Statement from "@/components/sections/Statement";
 import ServiceJourney from "@/components/sections/ServiceJourney";
 import Results from "@/components/sections/Results";
@@ -16,7 +15,6 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
-        <Marquee />
         <Statement />
         <ServiceJourney />
         <Results />

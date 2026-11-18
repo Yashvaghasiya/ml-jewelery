@@ -3,57 +3,66 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { testimonials } from "@/lib/site";
-import { SectionLabel } from "@/components/ui/Reveal";
-import { QuotesIcon } from "@phosphor-icons/react/dist/ssr";
+import { EASE_LUXE, SectionLabel } from "@/components/ui/Reveal";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { SampleTag } from "@/components/ui/Sample";
 
+const arrow =
+  "grid h-12 w-12 place-items-center rounded-full border border-line-light transition-[border-color,background-color,transform] duration-300 hover:border-ink hover:bg-ink/5 active:scale-[0.98]";
+
+/** One quote at a time, centred like a statement on a gallery wall. */
 export default function Testimonials() {
   const [i, setI] = useState(0);
+  const n = testimonials.length;
   const t = testimonials[i];
+  const go = (d: number) => setI((k) => (k + d + n) % n);
+
   return (
-    <section data-header="light" className="border-t border-line-light py-[clamp(88px,11vw,160px)]">
-      <div className="container-x grid gap-12 md:grid-cols-12">
-        <div className="md:col-span-3">
-          <SectionLabel no="05">Clients</SectionLabel>
-          <div className="mt-8 flex gap-2" role="group" aria-label="Choose a testimonial">
-            {testimonials.map((_, k) => (
-              <button
-                key={k}
-                type="button"
-                onClick={() => setI(k)}
-                aria-label={`Testimonial ${k + 1}`}
-                aria-pressed={k === i}
-                className={`grid h-11 w-11 place-items-center rounded-full border text-xs font-semibold tabular-nums transition-colors ${
-                  k === i ? "border-ink bg-ink text-ivory" : "border-ink/25 text-ink/70 hover:border-ink"
-                }`}
-              >
-                {String(k + 1).padStart(2, "0")}
-              </button>
-            ))}
-          </div>
-        </div>
-        <figure className="min-h-[22rem] md:col-span-9">
+    <section data-header="light" className="section border-t border-line-light" aria-roledescription="carousel" aria-label="Client quotes">
+      <div className="container-x flex flex-col items-center text-center">
+        <SectionLabel no="05">Clients</SectionLabel>
+        <figure className="mt-10 grid min-h-[22rem] w-full max-w-5xl place-items-center sm:min-h-[20rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: EASE_LUXE }}
+              aria-live="polite"
             >
-              <QuotesIcon weight="fill" className="h-10 w-10 text-taupe" aria-hidden />
-              <blockquote className="display mt-8 text-[clamp(2rem,4vw,3.8rem)] leading-[1.1]">{t.quote}</blockquote>
-              <figcaption className="mt-10 flex items-center gap-4 text-sm">
-                <span className="h-px w-10 bg-ink/40" />
-                <span>
-                  <strong className="font-semibold">{t.name}</strong>
-                  <span className="text-taupe">, {t.detail}</span>
-                </span>
+              <blockquote className="display display-lg leading-[1.08]">“{t.quote}”</blockquote>
+              <figcaption className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm">
+                <strong className="font-semibold">{t.name}</strong>
+                <span className="text-taupe">{t.detail}</span>
                 <SampleTag />
               </figcaption>
             </motion.div>
           </AnimatePresence>
         </figure>
+
+        <div className="mt-12 flex items-center gap-4">
+          <button type="button" onClick={() => go(-1)} aria-label="Previous quote" className={arrow}>
+            <ArrowLeftIcon className="h-4 w-4" aria-hidden />
+          </button>
+          <div className="flex gap-2" role="group" aria-label="Choose a quote">
+            {testimonials.map((_, k) => (
+              <button
+                key={k}
+                type="button"
+                onClick={() => setI(k)}
+                aria-label={`Quote ${k + 1} of ${n}`}
+                aria-pressed={k === i}
+                className="grid h-11 w-11 place-items-center"
+              >
+                <span className={`block h-2 rounded-full w-6 transition-[transform,background-color] duration-500 ${k === i ? "scale-x-100 bg-ink" : "scale-x-[0.34] bg-ink/25"}`} />
+              </button>
+            ))}
+          </div>
+          <button type="button" onClick={() => go(1)} aria-label="Next quote" className={arrow}>
+            <ArrowRightIcon className="h-4 w-4" aria-hidden />
+          </button>
+        </div>
       </div>
     </section>
   );

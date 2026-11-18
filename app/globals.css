@@ -73,6 +73,54 @@
     margin-inline: auto;
     padding-inline: clamp(16px, 4vw, 56px);
   }
+  /* Long, calm vertical silences between sections (Oura), on one flat ivory canvas. */
+  .section { padding-block: clamp(96px, 12vw, 176px); }
+
+  /* Display sizes (Instrument Serif). Fluid, per CLAUDE.md; everything else uses the Tailwind scale. */
+  .display-hero { font-size: clamp(3.5rem, 8vw, 8.5rem); }
+  .display-xl { font-size: clamp(3rem, 6.4vw, 6.5rem); }
+  .display-lg { font-size: clamp(2.5rem, 4.6vw, 4.75rem); }
+  .display-md { font-size: clamp(2rem, 3.2vw, 3.25rem); line-height: 1; }
+
+  /* Buttons: one pill grammar (Apple / Oura). Ink is the single action colour. */
+  .btn {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 9999px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    transition: background-color 300ms var(--ease-luxe), color 300ms var(--ease-luxe), border-color 300ms var(--ease-luxe), transform 500ms var(--ease-luxe);
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--color-ink); color: var(--color-ivory); }
+  .btn-primary:hover { background: var(--color-onyx); transform: translateY(-1px); }
+  .btn-secondary { border: 1px solid rgb(34 34 35 / 0.25); color: var(--color-ink); }
+  .btn-secondary:hover { border-color: var(--color-ink); background: rgb(34 34 35 / 0.04); }
+
+  /* Pill tab / chip (Oura pill-tab) */
+  .chip {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 9999px;
+    border: 1px solid rgb(34 34 35 / 0.15);
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition: background-color 300ms var(--ease-luxe), border-color 300ms var(--ease-luxe), color 300ms var(--ease-luxe);
+  }
+  .chip:hover { border-color: var(--color-ink); }
+  .chip[aria-pressed="true"], .chip[aria-current="true"] { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-ivory); }
+
+  /* The one shadow in the system (Apple): only under the pendant, the "product" resting in the hero. */
+  .product-shadow { box-shadow: 3px 5px 30px rgb(34 34 35 / 0.22); }
   /* Paper texture: a faint warm grain, like an atelier backdrop. On <body> it covers
      the whole landing page (fixed, so it never scrolls or repeats visibly). */
   .paper::before {
@@ -109,91 +157,3 @@ details[open] .faq-answer { animation: faq-in 500ms var(--ease-luxe) both; }
   }
 }
 
-/* Atelier edition: editorial rhythm, archival framing and tactile surfaces.
-   Existing Pantone tokens, Google font pairing and all content remain intact. */
-:root { --atelier-rule: 1px solid var(--color-line-light); }
-.display { letter-spacing: -.035em; }
-.label { letter-spacing: .18em; }
-button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, a:focus-visible { outline: 2px solid var(--color-champagne-deep); outline-offset: 5px; }
-header > div { border-radius: 8px !important; box-shadow: 0 8px 32px rgb(34 34 35 / .06); }
-header a[href="#contact"], header nav a { border-radius: 4px; }
-#top { background: var(--color-onyx); color: var(--color-ivory); border-bottom: 8px solid var(--color-champagne); }
-#top > .container-x { padding-top: 160px; padding-bottom: 80px; }
-#top .text-taupe { color: var(--color-greige); }
-#top h1 em { color: var(--color-champagne) !important; }
-#top > div > div:nth-child(2) { padding: 24px; border: 1px solid rgb(206 184 136 / .4); border-radius: 50% 50% 4px 4px; background: var(--color-ivory); box-shadow: 16px 16px 0 rgb(206 184 136 / .08); }
-#top button[aria-label^="Open "] { border-radius: 4px; }
-#top button[aria-label^="Open "] > span { border-radius: 4px; border: 3px solid var(--color-ivory); }
-#top button:not([aria-label]) { border-radius: 4px; background: var(--color-champagne); color: var(--color-ink); }
-#top button:not([aria-label]):hover { background: var(--color-ivory); }
-#top .bg-gradient-to-b { background-image: none; background-color: var(--color-champagne); }
-#main > section:nth-of-type(2) { border-bottom: var(--atelier-rule); }
-#main > section:nth-of-type(4) { background: var(--color-cream); padding-block: 80px; }
-#main > section:nth-of-type(4) dd { font-variant-numeric: lining-nums tabular-nums; }
-#process { background: var(--color-onyx); color: var(--color-ivory); }
-#process .text-taupe { color: var(--color-greige); }
-#process .bg-line-light { background: rgb(206 184 136 / .25); }
-#process li { padding-bottom: 64px; }
-#process li:last-child { padding-bottom: 0; }
-#main > section:nth-of-type(6) { background: var(--color-cream); }
-#main > section:nth-of-type(6) figure { border-left: 1px solid var(--color-champagne-deep); padding-left: 32px; }
-#main > section:nth-of-type(6) button { border-radius: 4px; }
-#faq details { padding-inline: 16px; transition: background-color 300ms var(--ease-luxe); }
-#faq details[open] { background: var(--color-cream); }
-#faq summary { padding-block: 24px; }
-#contact { background: var(--color-onyx); color: var(--color-ivory); }
-#contact > div > div:first-child .text-taupe { color: var(--color-champagne); }
-#contact > div > div:first-child .text-ink { color: var(--color-ivory); }
-#contact form { background: var(--color-ivory); color: var(--color-ink); padding: 40px; border: 1px solid var(--color-champagne); border-radius: 8px; box-shadow: 12px 12px 0 rgb(206 184 136 / .12); }
-#contact form label:has(input[type="radio"]) { border-radius: 4px; }
-#contact button[type="submit"] { border-radius: 4px; }
-#contact input:focus-visible, #contact textarea:focus-visible, #contact select:focus-visible { outline: 2px solid var(--color-champagne-deep); outline-offset: 4px; }
-footer { border-top: 1px solid var(--color-champagne-deep); }
-/* Shared interior pages: document-like measure and matching archival framing. */
-#main:not(:has(> #top)) { padding-top: 80px; padding-bottom: 96px; }
-#main:not(:has(> #top)) > h1 { max-width: 900px; }
-#main:not(:has(> #top)) li.rounded-2xl { border-radius: 8px; box-shadow: 0 8px 24px rgb(34 34 35 / .04); }
-/* Services form a browsable editorial portfolio, not a scroll-locked 3D demo. */
-.atelier-services { padding-block: 96px; }
-.atelier-index { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
-.atelier-index a { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; border: var(--atelier-rule); border-radius: 4px; font-size: 14px; }
-.atelier-index a:hover { background: var(--color-ink); color: var(--color-ivory); }
-.atelier-service { display: grid; grid-template-columns: 5fr 6fr; align-items: center; gap: 80px; padding-block: 80px; border-bottom: var(--atelier-rule); scroll-margin-top: 112px; }
-.atelier-service:nth-child(even) .atelier-service-copy { order: 2; }
-.atelier-service h3 { font-size: 60px; line-height: 1; }
-.atelier-service-copy > p { max-width: 440px; }
-.atelier-points { margin-top: 24px; display: grid; gap: 8px; font-size: 14px; }
-.atelier-points li { display: flex; align-items: center; gap: 12px; }
-.atelier-points li::before { content: ''; width: 16px; height: 1px; background: var(--color-champagne-deep); }
-.atelier-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; padding: 24px; background: var(--color-cream); border: var(--atelier-rule); border-radius: 8px; }
-.atelier-gallery figure:first-child { grid-column: 1 / -1; }
-.atelier-gallery img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; transition: transform 500ms var(--ease-luxe); }
-.atelier-gallery figure:first-child img { aspect-ratio: 4 / 3; }
-.atelier-gallery figure { overflow: hidden; }
-.atelier-gallery figure:hover img { transform: scale(1.025); }
-.atelier-gallery figcaption { margin-top: 8px; font-size: 12px; line-height: 16px; color: var(--color-taupe); }
-@media (min-width: 1024px) {
- #top > .container-x { grid-template-columns: 5fr 6fr; column-gap: 80px; row-gap: 32px; min-height: 900px; }
- #top > div > div:first-child { grid-column: 1; grid-row: 1; align-self: end; }
- #top > div > div:nth-child(2) { grid-column: 2; grid-row: 1 / 3; width: 100%; max-width: 640px; padding: 40px 16px; }
- #top > div > div:nth-child(3) { grid-column: 1; grid-row: 2; align-self: start; padding-bottom: 0; display: grid; gap: 0; }
- #top > div > div:nth-child(3) p:first-child { max-width: 400px; }
- #top h1 { font-size: 96px; line-height: 1; }
- #top > div > div:nth-child(3) button { justify-self: start; }
-}
-@media (max-width: 767px) {
- #top > .container-x { padding-top: 128px; padding-bottom: 64px; }
- #top h1 { font-size: 60px; line-height: 1; }
- #top > div > div:nth-child(2) { margin-block: 16px; }
- #contact form { padding: 24px; box-shadow: 6px 6px 0 rgb(206 184 136 / .12); }
- #main > section:nth-of-type(6) figure { padding-left: 16px; }
- .atelier-services { padding-block: 64px; }
- .atelier-service { grid-template-columns: 1fr; gap: 32px; padding-block: 48px; }
- .atelier-service:nth-child(even) .atelier-service-copy { order: initial; }
- .atelier-service h3 { font-size: 48px; }
- .atelier-gallery { padding: 16px; }
-}
-@media (prefers-reduced-motion: reduce) { .atelier-gallery img { transition: none; } .atelier-gallery figure:hover img { transform: none; } }
-
-@media(min-width:1024px){ #top > .container-x { min-height:760px; padding-top:128px; padding-bottom:64px; column-gap:64px; } #top h1 { font-size:72px; } #top > div > div:nth-child(2) { max-width:500px; padding:32px 16px; } }

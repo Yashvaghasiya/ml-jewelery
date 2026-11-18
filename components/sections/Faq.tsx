@@ -31,11 +31,12 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" data-header="light" className="bg-ivory py-24 md:py-32">
+    <section id="faq" data-header="light" className="section border-t border-line-light">
       <div className="container-x grid gap-12 md:grid-cols-12">
         <div className="md:col-span-4">
+          <div className="md:sticky md:top-32">
           <SectionLabel no="06">FAQ</SectionLabel>
-          <h2 className="display mt-6 text-[clamp(2.6rem,5vw,5rem)]">
+          <h2 className="display display-lg mt-6">
             <MaskLines lines={["Questions brands", "ask us first."]} />
           </h2>
           <Reveal>
@@ -43,6 +44,7 @@ export default function Faq() {
               Something else on your mind? Ask it in the brief below and we answer within one working day.
             </p>
           </Reveal>
+          </div>
         </div>
 
         <Reveal className="md:col-span-7 md:col-start-6">
@@ -51,7 +53,9 @@ export default function Faq() {
               <details key={f.q} className="group border-b border-line-light">
                 <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-medium transition-colors hover:text-taupe [&::-webkit-details-marker]:hidden">
                   {f.q}
-                  <PlusIcon className="h-5 w-5 shrink-0 text-taupe transition-transform duration-500 group-open:rotate-45" aria-hidden />
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-light transition-[transform,background-color,border-color] duration-500 group-open:rotate-45 group-open:border-ink group-open:bg-ink group-open:text-ivory" aria-hidden>
+                    <PlusIcon className="h-4 w-4" />
+                  </span>
                 </summary>
                 <p className="faq-answer max-w-2xl pb-6 text-base text-taupe">
                   <Answer text={f.a} />

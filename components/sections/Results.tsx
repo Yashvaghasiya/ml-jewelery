@@ -30,20 +30,27 @@ function Count({ to, decimals = 0, suffix }: { to: number; decimals?: number; su
 
 export default function Results() {
   return (
-    <section data-header="light" className="bg-ivory py-[clamp(88px,10vw,150px)]">
+    <section data-header="light" className="section border-t border-line-light">
       <div className="container-x">
-        <SectionLabel no="03">In numbers</SectionLabel>
-        <dl className="mt-12 grid grid-cols-2 border-t border-line-light lg:grid-cols-4">
+        <div className="flex flex-col items-center text-center">
+          <SectionLabel no="03">In numbers</SectionLabel>
+          <h2 className="display display-lg mt-6 max-w-3xl">
+            What the work does <em className="text-taupe">after</em> the shoot.
+          </h2>
+        </div>
+        <dl className="mx-auto mt-16 grid max-w-6xl grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.06} className={`flex flex-col-reverse border-b border-line-light py-10 pr-4 lg:border-b-0 ${i % 2 ? "pl-6" : ""} lg:pl-0 ${i ? "lg:border-l lg:pl-8" : ""}`}>
-              <dt className="mt-3 text-sm text-taupe">{s.label}</dt>
-              <dd className="display text-[clamp(3.4rem,7vw,6.5rem)] leading-none">
+            <Reveal key={s.label} delay={i * 0.06} className="flex aspect-square flex-col-reverse items-center justify-center rounded-full border border-line-light p-4 text-center">
+              <dt className="mt-2 max-w-[12ch] text-sm text-taupe sm:mt-4">{s.label}</dt>
+              <dd className="display text-5xl leading-none sm:text-7xl">
                 <Count to={s.value} decimals={s.decimals} suffix={s.suffix} />
               </dd>
             </Reveal>
           ))}
         </dl>
-        <SampleNote>These figures are samples. Replace them with your real results before launch.</SampleNote>
+        <div className="flex justify-center">
+          <SampleNote>These figures are samples. Replace them with your real results before launch.</SampleNote>
+        </div>
       </div>
     </section>
   );
