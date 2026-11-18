@@ -77,7 +77,7 @@
   .section { padding-block: clamp(96px, 12vw, 176px); }
 
   /* Display sizes (Instrument Serif). Fluid, per CLAUDE.md; everything else uses the Tailwind scale. */
-  .display-hero { font-size: clamp(3.5rem, 8vw, 8.5rem); }
+  .display-hero { font-size: clamp(3.25rem, 5.6vw, 6rem); }
   .display-xl { font-size: clamp(3rem, 6.4vw, 6.5rem); }
   .display-lg { font-size: clamp(2.5rem, 4.6vw, 4.75rem); }
   .display-md { font-size: clamp(2rem, 3.2vw, 3.25rem); line-height: 1; }

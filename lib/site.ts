@@ -159,6 +159,17 @@ export const services: {
   },
 ];
 
+/* --------------------------------------------------------------------------
+   The atelier: the scroll moment where one frame turns through the stages
+   of the work. Each stage shows one photo (from lib/images.ts) and one line.
+   -------------------------------------------------------------------------- */
+export const atelier: { label: string; line: string; image: { src: string; alt: string } }[] = [
+  { label: "Macro", line: "Every facet in focus, and metal in its true tone.", image: images.services.photography[0] },
+  { label: "On model", line: "Pieces worn the way your customer will wear them.", image: images.portfolio[1] },
+  { label: "Campaign", line: "One story across the shoot, the reel and the ads.", image: images.portfolio[3] },
+  { label: "Feed", line: "Posts cut for every placement, ready to publish.", image: images.services.social[4] },
+];
+
 // Placeholder numbers: replace with your real results before going live.
 export const stats = [
   { value: 140, suffix: "+", label: "Jewellery brands served" },

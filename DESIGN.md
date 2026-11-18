@@ -64,14 +64,16 @@ These rules keep the site looking deliberate and premium rather than templated. 
 - With `prefers-reduced-motion`, the hero ring stays still, Lenis is off, and Motion skips transform animations.
 
 ## 5. Hero
-- The hero is a light ivory "atelier" with a faint paper grain. A real pendant photo sits in a round champagne frame and hangs from a beaded chain. Eight work photos turn slowly around it.
-- Each tile's frame faces the centre while the photo inside stays upright. The ring takes about 90 seconds per turn, and scrolling adds a quarter turn. Hover or focus pauses it.
+- The hero is a quiet cream "atelier" with a faint paper grain, in the spirit of the "Lumière" concept on getlayers.ai. It is an original implementation in this site's palette, fonts and copy; the paid template itself was not used or copied.
+- **Layout (desktop):** a modest headline vertically centred on the left; the real pendant photo hanging on a fine chain from the top of the screen, inside a slowly turning ring of eight photos; small tabs on the right edge; the pitch and the one CTA at the foot on the left. On phones: headline, pitch and CTA, then the ring and tabs, so the CTA is in the first screen.
+- **Tiles** are soft rounded squares (26% radius) on a greige tint, with no shadow. Each frame faces the centre (square at the top, bottom and sides, diamond on the diagonals) while the photo inside stays upright. The ring takes about 90 seconds per turn, scrolling adds a quarter turn, and hover or focus pauses it.
+- **Side tabs** switch what turns around the pendant: *Work* (the eight portfolio items, each opens the work viewer) or *Social* (eight feed photos, decorative). The photos crossfade when the set changes.
 - There is no 3D on the site. 3D jewellery and the 3D camera were removed at the owner's request, and the work is shown as real photography.
-- The layout was inspired by the "Lumière" concept on getlayers.ai. It is an original implementation in this site's palette and copy, not a copy of that paid template.
 
 ## 6. Sections
 - **Hero:** label, headline, one sentence, one pill CTA ("Start a project") and a quiet "See the work" link; the pendant ring sits to the right on desktop.
 - **The studio:** centred tagline that fills in word by word as you scroll.
+- **The atelier:** a pinned stage (about three screens of scroll). One rounded square frame makes a single full turn: square while a stage is shown, diamond while its photo changes, with the photo always upright. Stages (Macro, On model, Campaign, Feed) are listed on the right like the hero tabs and can be clicked; a hairline fills with progress. The stages, their lines and photos live in `atelier` in `lib/site.ts`. This replaces the 3D "spinning rings" idea with photography.
 - **Services:** pill tabs, then one chapter per service: sticky copy on the left, its work on the right. The photo arrangement follows the service (`layout` in `lib/site.ts`): gallery, 9:16 reels, a 3 × 3 feed, or portrait cards.
   - **Scroll motion:** the pill tabs float at the top of the section and mark the chapter in view. Each photo is unveiled upward (a sheet of ivory lifts away) and settles from a 1.15 zoom, then drifts about 5% inside its frame. In two column layouts the second column moves at its own pace, the middle reel moves against the outer two, and the feed arrives as a diagonal wave. Titles rise from a mask, the text follows in a short stagger, and a hairline under each chapter label fills as you read. With reduced motion, photos and text only fade in and nothing drifts.
 - **In numbers:** four round badges.

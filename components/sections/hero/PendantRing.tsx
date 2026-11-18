@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useAnimationFrame, useMotionValue, useTransform, type MotionValue } from "motion/react";
+import { AnimatePresence, motion, useAnimationFrame, useMotionValue, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 import { heroPendant, works, workStill, type Work } from "@/lib/site";
 import { EASE_LUXE } from "@/components/ui/Reveal";
@@ -18,7 +18,12 @@ const TILE = 21; // % of the ring box
   while the photo inside always stays upright.
 */
 
-function Tile({ work, index, ring, onOpen, onHover, reduced }: { work: Work; index: number; ring: MotionValue<number>; onOpen: (i: number) => void; onHover: (on: boolean) => void; reduced: boolean }) {
+export type RingItem = { src: string; alt: string; title?: string };
+
+/** Ring items for the portfolio (each opens the work viewer). */
+export const workItems: RingItem[] = works.map((w: Work) => ({ src: workStill(w), alt: w.alt, title: w.title }));
+
+function Tile({ item, index, ring, onOpen, onHover, reduced }: { item: RingItem; index: number; ring: MotionValue<number>; onOpen?: (i: number) => void; onHover: (on: boolean) => void; reduced: boolean }) {
   const base = (index / COUNT) * 360; // 0° = top
   const rad = ((base - 90) * Math.PI) / 180;
   const x = 50 + RADIUS * Math.cos(rad);
@@ -26,32 +31,68 @@ function Tile({ work, index, ring, onOpen, onHover, reduced }: { work: Work; ind
   // Undo the ring's turn and the tile's own tilt so the photo stays upright.
   const upright = useTransform(ring, (r) => -(r + base));
 
+  const face = (
+    <span className="absolute inset-0 overflow-hidden rounded-[26%] bg-greige/25 transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]">
+      {/* 142% so the upright photo still covers the frame when the frame is turned 45° */}
+      <motion.span className="absolute -inset-[21%] block" style={{ rotate: upright }}>
+        {/* A soft crossfade when the ring switches sets */}
+        <AnimatePresence initial={false}>
+          <motion.span
+            key={item.src}
+            className="absolute inset-0 block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: EASE_LUXE, delay: index * 0.04 }}
+          >
+            <Image src={item.src} alt="" fill sizes="(min-width: 1024px) 140px, 22vw" className="object-cover" />
+          </motion.span>
+        </AnimatePresence>
+      </motion.span>
+    </span>
+  );
+
+  const common = {
+    className: "group absolute -translate-x-1/2 -translate-y-1/2 rounded-[26%] focus-visible:outline-offset-4",
+    style: { left: `${x}%`, top: `${y}%`, width: `${TILE}%`, height: `${TILE}%`, rotate: base },
+    initial: reduced ? { opacity: 0 } : { opacity: 0, scale: 0.6 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.7, ease: EASE_LUXE, delay: 0.5 + index * 0.06 },
+  };
+
+  if (!onOpen) return <motion.span {...common} aria-hidden>{face}</motion.span>;
   return (
     <motion.button
       type="button"
+      {...common}
+      className={`${common.className} cursor-pointer`}
       onClick={() => onOpen(index)}
       onPointerEnter={() => onHover(true)}
       onPointerLeave={() => onHover(false)}
       onFocus={() => onHover(true)}
       onBlur={() => onHover(false)}
-      aria-label={`Open ${work.title}`}
-      className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-[24%] focus-visible:outline-offset-4"
-      style={{ left: `${x}%`, top: `${y}%`, width: `${TILE}%`, height: `${TILE}%`, rotate: base }}
-      initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7, ease: EASE_LUXE, delay: 0.5 + index * 0.06 }}
+      aria-label={`Open ${item.title ?? item.alt}`}
     >
-      <span className="absolute inset-0 overflow-hidden rounded-[24%] bg-cream shadow-[0_14px_30px_-16px_rgb(34_34_35/0.45)] transition-transform duration-500 group-hover:scale-[1.08] group-focus-visible:scale-[1.08]">
-        {/* 142% so the upright photo still covers the frame when the frame is turned 45° */}
-        <motion.span className="absolute -inset-[21%] block" style={{ rotate: upright }}>
-          <Image src={workStill(work)} alt="" fill sizes="(min-width: 1024px) 140px, 22vw" className="object-cover" />
-        </motion.span>
-      </span>
+      {face}
     </motion.button>
   );
 }
 
-export default function PendantRing({ scrollTurn, reduced, onOpen }: { scrollTurn: MotionValue<number>; reduced: boolean; onOpen: (i: number) => void }) {
+/**
+ * `items` fills the eight tiles (default: the portfolio). Pass `onOpen` to make the
+ * tiles buttons; without it they are decorative.
+ */
+export default function PendantRing({
+  scrollTurn,
+  reduced,
+  onOpen,
+  items = workItems,
+}: {
+  scrollTurn: MotionValue<number>;
+  reduced: boolean;
+  onOpen?: (i: number) => void;
+  items?: RingItem[];
+}) {
   const spin = useMotionValue(0);
   const speed = useRef(1); // eases to 0 while a tile is hovered or focused
   const target = useRef(1);
@@ -63,7 +104,7 @@ export default function PendantRing({ scrollTurn, reduced, onOpen }: { scrollTur
   });
   const ring = useTransform([spin, scrollTurn], ([a, b]: number[]) => a + b);
   const hover = (on: boolean) => (target.current = on ? 0 : 1);
-  const tiles = works.slice(0, COUNT);
+  const tiles = items.slice(0, COUNT);
 
   return (
     <div className="relative aspect-square w-full">
@@ -88,9 +129,9 @@ export default function PendantRing({ scrollTurn, reduced, onOpen }: { scrollTur
               d={d}
               fill="none"
               stroke="var(--color-champagne-deep)"
-              strokeWidth="2.4"
+              strokeWidth="1.6"
               strokeLinecap="round"
-              strokeDasharray="0.01 4.6"
+              strokeDasharray="0.01 2.8"
               vectorEffect="non-scaling-stroke"
             />
           ))}
@@ -107,8 +148,8 @@ export default function PendantRing({ scrollTurn, reduced, onOpen }: { scrollTur
 
       {/* The turning ring of work */}
       <motion.div className="absolute inset-0" style={{ rotate: ring }}>
-        {tiles.map((w, i) => (
-          <Tile key={w.slug} work={w} index={i} ring={ring} onOpen={onOpen} onHover={hover} reduced={reduced} />
+        {tiles.map((item, i) => (
+          <Tile key={i} item={item} index={i} ring={ring} onOpen={onOpen} onHover={hover} reduced={reduced} />
         ))}
       </motion.div>
     </div>

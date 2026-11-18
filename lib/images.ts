@@ -51,15 +51,15 @@ export const images = {
     ] as Img[],
     // Social media: 9 photos in the phone feed
     social: [
-      { src: "/images/services/social-1.webp", alt: "social photo" },
-      { src: "/images/services/social-2.webp", alt: "social photo" },
-      { src: "/images/services/social-3.webp", alt: "social photo" },
-      { src: "/images/services/social-4.webp", alt: "social photo" },
-      { src: "/images/services/social-5.webp", alt: "social photo" },
-      { src: "/images/services/social-6.webp", alt: "social photo" },
-      { src: "/images/services/social-7.webp", alt: "social photo" },
-      { src: "/images/services/social-8.webp", alt: "social photo" },
-      { src: "/images/services/social-9.webp", alt: "social photo" },
+      { src: "/images/services/social-1.webp", alt: "Woman in window light wearing a gold collar necklace" },
+      { src: "/images/services/social-2.webp", alt: "Gold hoop earrings resting on an open book" },
+      { src: "/images/services/social-3.webp", alt: "Pearl necklace and earrings in an open jewellery box" },
+      { src: "/images/services/social-4.webp", alt: "Rose gold diamond drop earrings on blue paper" },
+      { src: "/images/services/social-5.webp", alt: "Woman in a cream blazer wearing a gold chain necklace" },
+      { src: "/images/services/social-6.webp", alt: "Pearl stud earrings in a black box on a wooden table" },
+      { src: "/images/services/social-7.webp", alt: "Bride in red with kundan necklace, nath and maang tikka" },
+      { src: "/images/services/social-8.webp", alt: "Rose gold cuff bracelet on embroidered fabric" },
+      { src: "/images/services/social-9.webp", alt: "Kundan choker and maang tikka with red and green stones" },
     ] as Img[],
     // Performance ads: 2 ad cards
     ads: [
