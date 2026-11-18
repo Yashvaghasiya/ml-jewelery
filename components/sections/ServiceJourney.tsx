@@ -47,7 +47,7 @@ export default function ServiceJourney() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
                 {svc.shots.map((shot, i) => (
                   <figure key={`${shot.src}-${i}`}>
-                    <Image src={shot.src} alt={shot.label ?? svc.title} width={900} height={1100}
+                    <Image src={shot.src} alt={shot.alt ?? shot.label ?? svc.title} width={900} height={1100}
                       sizes="(min-width: 1024px) 40vw, 90vw" loading="lazy" />
                     {shot.label && <figcaption>{shot.label}</figcaption>}
                   </figure>
