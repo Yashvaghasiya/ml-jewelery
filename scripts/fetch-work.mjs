@@ -4,7 +4,8 @@
 //     Saves a 1200px JPEG of each photo into <outDir> so they can be looked at first.
 //
 //   node scripts/fetch-work.mjs build <slug>=<id> [<slug>=<id> ...]
-//     Writes public/work/<slug>.webp (longest side max 2000px). next/image
+//     Writes public/images/new/<slug>.webp (longest side max 2000px). Then copy it
+//     over the slot you want (e.g. public/images/portfolio/03.webp). next/image
 //     generates the smaller sizes from it, so one file per photo is enough.
 //
 // Behind a proxy, run with NODE_USE_ENV_PROXY=1.
@@ -45,7 +46,7 @@ if (mode === "review") {
     }
   }
 } else if (mode === "build") {
-  const out = "public/work";
+  const out = "public/images/new";
   mkdirSync(out, { recursive: true });
   for (const pair of args) {
     const [slug, id] = pair.split("=");

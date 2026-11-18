@@ -32,8 +32,8 @@ Everything client-specific lives in **`lib/site.ts`**:
 | What | Where in `lib/site.ts` |
 |---|---|
 | Brand name, phone, WhatsApp number, email, address, socials | `site` |
-| The 8 photos in the hero ring, and the work viewer | `works` (order = order around the pendant) |
-| The pendant photo in the centre of the hero | `heroPendant` |
+| Titles, clients and results of the 8 portfolio items | `works` (order = order around the pendant) |
+| **All photos** (hero, portfolio, services) | **`lib/images.ts`** + files in `public/images/`; see *Changing photos* |
 | Services journey (scroll section): name, pitch, key points, result and the work shown beside each service | `services` (`shots` = the images; `layout` = gallery, reels, phone feed, ads or browser) |
 | Numbers section | `stats` (**samples: replace with real results**) |
 | FAQ questions and answers | `faq` (anything in `{{double braces}}` is a fact only you can supply; it shows highlighted until replaced) |
@@ -42,26 +42,28 @@ Everything client-specific lives in **`lib/site.ts`**:
 | Process steps | `process` |
 | Client quotes | `testimonials` (**samples: replace with real quotes**) |
 
-### Placeholder photos (temporary)
-Until your own work is ready, the site uses free-licence stock photos from [Pexels](https://www.pexels.com/license/), which allows free commercial use. They're saved as WebP in `public/work/`, and the viewer captions them "Placeholder photo · …".
-- **Replace them before launch.** A portfolio has to show *your* work.
-- If a photo ever fails to load, a calm neutral placeholder is shown instead of a broken image.
+### Changing photos (no coding needed)
+Every image on the site is a file in **`public/images/`**, and **`lib/images.ts`** lists them all in one place.
 
-### Adding your own photos and reels
-1. Put files in `public/work/`. Use JPG/WebP for photos (about 2000px on the long side is plenty) and MP4 (H.264) for reels, kept under about 8 MB.
-2. In `works`, set `media` and `alt` (a short description of the photo):
-   ```ts
-   { type: "image", src: "/work/bridal-01.webp" }
-   { type: "video", src: "/work/reel-01.mp4", poster: "/work/reel-01.webp" }
-   ```
-   Then delete that item's `credit` line.
-3. For the hero centrepiece, set `heroPendant.src` to a **square** close-up of one piece. It's shown in a round frame.
+| File | Where it shows |
+|---|---|
+| `public/images/hero/pendant.webp` | The round photo in the middle of the hero. Use a **square** photo with the piece in the centre. |
+| `public/images/portfolio/01.webp` … `08.webp` | The 8 photos turning around the pendant (01 at the top, then clockwise), and the full-screen work viewer |
+| `public/images/services/photography-1…3.webp` | Jewellery photography stop |
+| `public/images/services/reels-1…3.webp` | Reels stop (phone screens) |
+| `public/images/services/social-1…9.webp` | Social media stop (the phone feed) |
+| `public/images/services/ads-1…2.webp` | Performance ads stop |
+| `public/images/services/website-1…2.webp` | Websites stop (1 = browser, 2 = phone) |
 
-`scripts/fetch-work.mjs` downloads Pexels photos and converts them to WebP (run it with `NODE_USE_ENV_PROXY=1` behind a proxy):
-```bash
-node scripts/fetch-work.mjs review ./review 8398936 5050491   # preview JPEGs to look at first
-node scripts/fetch-work.mjs build solitaire=8398936          # writes public/work/solitaire.webp
-```
+**To replace a photo:** upload your photo with the **same file name**, for example on GitHub: open the folder, then *Add file → Upload files*. That's it.
+- If your photo is `.jpg` or `.png`, either rename it to the slot's name, or change the extension on that line in `lib/images.ts`.
+- Update the photo's `alt` text in `lib/images.ts` (a short description, read by Google and screen readers).
+- About 1600–2000px on the long side is plenty. For reels, set `media: { type: "video", … }` on that work item in `lib/site.ts`.
+- Titles, clients and results for the 8 portfolio items are in `lib/site.ts` → `works`. Once a photo is yours, delete that item's `credit` line.
+
+The current photos are free-licence placeholders from [Pexels](https://www.pexels.com/license/). **Replace them before launch**, because a portfolio has to show *your* work. If a photo ever fails to load, a calm placeholder is shown instead of a broken image.
+
+`scripts/fetch-work.mjs` can download Pexels photos as WebP into `public/images/new/` (run it with `NODE_USE_ENV_PROXY=1` behind a proxy). Copy the result over the slot you want.
 
 ### Before launch
 - Replace every `{{placeholder}}` in `lib/site.ts` (FAQ) and in `app/privacy` and `app/terms`, and have the legal pages reviewed.

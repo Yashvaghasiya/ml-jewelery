@@ -8,7 +8,7 @@ import { EyeIcon, HeartIcon, PlayIcon, UserPlusIcon } from "@phosphor-icons/reac
   the parent must have transform-style: preserve-3d.
 */
 
-const Img = ({ shot, sizes }: { shot: Shot; sizes: string }) => <WorkImage src={shot.src} alt={shot.label ?? ""} sizes={sizes} />;
+const Img = ({ shot, sizes }: { shot: Shot; sizes: string }) => <WorkImage src={shot.src} alt={shot.alt ?? shot.label ?? ""} sizes={sizes} />;
 
 const Tag = ({ children }: { children: React.ReactNode }) => (
   <span className="absolute bottom-[0.9em] left-[0.9em] rounded-full bg-black/55 px-[0.9em] py-[0.35em] text-[0.85em] font-medium text-ivory backdrop-blur-sm">

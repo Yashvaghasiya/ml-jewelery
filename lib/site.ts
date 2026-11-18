@@ -1,4 +1,6 @@
 // Everything a client-specific build needs to change lives in this file.
+// Photos live in lib/images.ts (and the files in /public/images/).
+import { images } from "./images";
 
 export const site = {
   brand: "Verdane",
@@ -30,11 +32,10 @@ export const waLink = (text: string) => `https://wa.me/${site.whatsapp}?text=${e
    Portfolio: the photos turning around the hero pendant, and the work viewer.
 
    The photos are TEMPORARY free-licence stock photos from Pexels
-   (https://www.pexels.com/license/), saved in /public/work/, until your own
-   work is ready. To use yours: put files in /public/work/ and set
-     media: { type: "image", src: "/work/x.webp" }
-     media: { type: "video", src: "/work/x.mp4", poster: "/work/x.webp" }
-   then delete the `credit` line (it prints "Placeholder photo · ...").
+   (https://www.pexels.com/license/). Change the photos in lib/images.ts or by
+   replacing the files in /public/images/portfolio/. When a photo is yours,
+   delete that item's `credit` line (it prints "Placeholder photo · ...").
+   A reel instead of a photo: media: { type: "video", src: "/images/portfolio/01.mp4", poster: images.portfolio[0].src }
    Results are samples (see site.sampleContent).
    -------------------------------------------------------------------------- */
 export type Media = { type: "image"; src: string } | { type: "video"; src: string; poster?: string };
@@ -53,29 +54,28 @@ export type Work = {
 
 // Order matters: this is the order the tiles sit around the hero pendant.
 export const works: Work[] = [
-  { slug: "solitaire", title: "The Solitaire Edit", client: "Placeholder Jewellers", service: "Product photography", year: 2026, result: "+38% add to cart on product pages", media: { type: "image", src: "/work/solitaire.webp" }, alt: "Diamond solitaire ring on a dark stand", credit: "The Glorious Studio / Pexels" },
-  { slug: "nisha", title: "Nisha Bridal Reels", client: "Placeholder Bridal House", service: "Reels & short film", year: 2025, result: "4.6x ROAS on Meta ads", media: { type: "image", src: "/work/bride-red.webp" }, alt: "Bride in red with kundan necklace, nath and maang tikka", credit: "Pexels" },
-  { slug: "rose-gold", title: "Rose Gold Edit", client: "Placeholder Atelier", service: "Ecommerce shoot", year: 2026, result: "120 pieces shot in 3 days", media: { type: "image", src: "/work/rose-earrings.webp" }, alt: "Rose gold diamond drop earrings on blue paper", credit: "Pexels" },
-  { slug: "golden-hour", title: "Golden Hour Campaign", client: "Placeholder Fine Jewels", service: "Campaign & social", year: 2026, result: "2.1M organic reach in 3 weeks", media: { type: "image", src: "/work/gold-collar.webp" }, alt: "Woman in window light wearing a gold collar necklace", credit: "cottonbro studio / Pexels" },
-  { slug: "kundan", title: "Kundan Heritage Story", client: "Placeholder Heritage Jewellers", service: "Product photography", year: 2025, result: "+64% saves on Instagram", media: { type: "image", src: "/work/kundan-choker.webp" }, alt: "Kundan choker and maang tikka with red and green stones", credit: "Pexels" },
-  { slug: "bangles", title: "Festive Bangles Edit", client: "Placeholder Heritage Jewellers", service: "Campaign & social", year: 2025, result: "+52% festive season enquiries", media: { type: "image", src: "/work/festive-bangles.webp" }, alt: "Hands wearing layered gold bracelets", credit: "Pexels" },
-  { slug: "diamond-line", title: "Diamond Line Online Store", client: "Placeholder Atelier", service: "Ecommerce shoot", year: 2025, result: "180 SKUs shot in 4 days", media: { type: "image", src: "/work/crystal-set.webp" }, alt: "Diamond necklace, bracelet, ring and earrings set on pale blue", credit: "Pexels" },
-  { slug: "pearl", title: "Pearl Season", client: "Placeholder Gems", service: "Performance ads", year: 2024, result: "CPA cut from ₹2,400 to ₹890", media: { type: "image", src: "/work/pearls.webp" }, alt: "Pearl necklace and earrings in an open jewellery box", credit: "Pexels" },
+  { slug: "solitaire", title: "The Solitaire Edit", client: "Placeholder Jewellers", service: "Product photography", year: 2026, result: "+38% add to cart on product pages", media: { type: "image", src: images.portfolio[0].src }, alt: images.portfolio[0].alt, credit: "The Glorious Studio / Pexels" },
+  { slug: "nisha", title: "Nisha Bridal Reels", client: "Placeholder Bridal House", service: "Reels & short film", year: 2025, result: "4.6x ROAS on Meta ads", media: { type: "image", src: images.portfolio[1].src }, alt: images.portfolio[1].alt, credit: "Pexels" },
+  { slug: "rose-gold", title: "Rose Gold Edit", client: "Placeholder Atelier", service: "Ecommerce shoot", year: 2026, result: "120 pieces shot in 3 days", media: { type: "image", src: images.portfolio[2].src }, alt: images.portfolio[2].alt, credit: "Pexels" },
+  { slug: "golden-hour", title: "Golden Hour Campaign", client: "Placeholder Fine Jewels", service: "Campaign & social", year: 2026, result: "2.1M organic reach in 3 weeks", media: { type: "image", src: images.portfolio[3].src }, alt: images.portfolio[3].alt, credit: "cottonbro studio / Pexels" },
+  { slug: "kundan", title: "Kundan Heritage Story", client: "Placeholder Heritage Jewellers", service: "Product photography", year: 2025, result: "+64% saves on Instagram", media: { type: "image", src: images.portfolio[4].src }, alt: images.portfolio[4].alt, credit: "Pexels" },
+  { slug: "bangles", title: "Festive Bangles Edit", client: "Placeholder Heritage Jewellers", service: "Campaign & social", year: 2025, result: "+52% festive season enquiries", media: { type: "image", src: images.portfolio[5].src }, alt: images.portfolio[5].alt, credit: "Pexels" },
+  { slug: "diamond-line", title: "Diamond Line Online Store", client: "Placeholder Atelier", service: "Ecommerce shoot", year: 2025, result: "180 SKUs shot in 4 days", media: { type: "image", src: images.portfolio[6].src }, alt: images.portfolio[6].alt, credit: "Pexels" },
+  { slug: "pearl", title: "Pearl Season", client: "Placeholder Gems", service: "Performance ads", year: 2024, result: "CPA cut from ₹2,400 to ₹890", media: { type: "image", src: images.portfolio[7].src }, alt: images.portfolio[7].alt, credit: "Pexels" },
 ];
 
 /** Image to show for a work item (video poster, or the image itself). */
 export const workStill = (w: Work) => (w.media.type === "video" ? (w.media.poster ?? "") : w.media.src);
 
 /** The centrepiece of the hero: a real photo, shown in a round champagne frame. */
-export const heroPendant = { src: "/work/pendant.webp", alt: "Emerald and diamond flower pendant" };
+export const heroPendant = images.heroPendant;
 
 /* --------------------------------------------------------------------------
    Services journey: each service is a stop in the scroll-driven section,
    shown with the kind of work it produces (`layout` picks the mockup).
-   `shots` are TEMPORARY free Pexels photos (in /public/work/); replace them
-   with your own work, e.g. { src: "/work/x.webp", label: "..." }.
+   Photos come from lib/images.ts → images.services (files in /public/images/services/).
    -------------------------------------------------------------------------- */
-export type Shot = { src: string; label?: string };
+export type Shot = { src: string; alt?: string; label?: string };
 export type ServiceLayout = "gallery" | "reels" | "phone" | "ads" | "browser";
 
 
@@ -96,9 +96,9 @@ export const services: {
     points: ["Macro on white", "On model & lifestyle", "Hand retouching"],
     result: "+38% add to cart on product pages",
     shots: [
-      { src: "/work/solitaire.webp", label: "Solitaire · macro" },
-      { src: "/work/pear-diamond.webp", label: "Pear diamond" },
-      { src: "/work/two-tone-ring.webp", label: "Two tone band" },
+      { ...images.services.photography[0], label: "Solitaire · macro" },
+      { ...images.services.photography[1], label: "Pear diamond" },
+      { ...images.services.photography[2], label: "Two tone band" },
     ],
   },
   {
@@ -109,9 +109,9 @@ export const services: {
     points: ["Concept & script", "4K / 120fps shoots", "Edit, colour & sound"],
     result: "2.1M organic reach in 3 weeks",
     shots: [
-      { src: "/work/golden-hour.webp", label: "1.2M views" },
-      { src: "/work/bridal-ear.webp", label: "860K views" },
-      { src: "/work/bride-purple.webp", label: "2.4M views" },
+      { ...images.services.reels[0], label: "1.2M views" },
+      { ...images.services.reels[1], label: "860K views" },
+      { ...images.services.reels[2], label: "2.4M views" },
     ],
   },
   {
@@ -122,15 +122,15 @@ export const services: {
     points: ["Content calendar", "Daily posting & stories", "Community & creators"],
     result: "+3,280 followers a month",
     shots: [
-      { src: "/work/gold-collar.webp" },
-      { src: "/work/gold-hoops.webp" },
-      { src: "/work/pearls.webp" },
-      { src: "/work/rose-earrings.webp" },
-      { src: "/work/gold-chain.webp" },
-      { src: "/work/pearl-studs.webp" },
-      { src: "/work/bride-red.webp" },
-      { src: "/work/rose-cuff.webp" },
-      { src: "/work/kundan-choker.webp" },
+      { ...images.services.social[0] },
+      { ...images.services.social[1] },
+      { ...images.services.social[2] },
+      { ...images.services.social[3] },
+      { ...images.services.social[4] },
+      { ...images.services.social[5] },
+      { ...images.services.social[6] },
+      { ...images.services.social[7] },
+      { ...images.services.social[8] },
     ],
   },
   {
@@ -141,8 +141,8 @@ export const services: {
     points: ["Meta & Google ads", "Festive & wedding campaigns", "Weekly ROAS reports"],
     result: "4.6x return on ad spend",
     shots: [
-      { src: "/work/rose-cuff.webp", label: "Rose Gold Cuff" },
-      { src: "/work/festive-bangles.webp", label: "Festive Bangles" },
+      { ...images.services.ads[0], label: "Rose Gold Cuff" },
+      { ...images.services.ads[1], label: "Festive Bangles" },
     ],
   },
   {
@@ -153,8 +153,8 @@ export const services: {
     points: ["Shopify & Next.js", "Product pages that convert", "Speed & SEO"],
     result: "1.8x conversion after redesign",
     shots: [
-      { src: "/work/diamond-necklace.webp", label: "Heritage Necklace" },
-      { src: "/work/crystal-set.webp" },
+      { ...images.services.website[0], label: "Heritage Necklace" },
+      { ...images.services.website[1] },
     ],
   },
 ];
