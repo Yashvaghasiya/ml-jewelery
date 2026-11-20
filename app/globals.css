@@ -182,3 +182,60 @@ details[open] .faq-answer { animation: faq-in 500ms var(--ease-luxe) both; }
   }
 }
 
+
+/* A dark cover and a photographic mount frame the first jewellery study. */
+.studio-hero {
+  overflow: clip;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 76% 42%, #453c30, #24211e 55%, #191817);
+  color: var(--color-ivory);
+}
+.studio-cover {
+  display: grid;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+  padding-block: clamp(7rem, 12vh, 11rem) 3rem;
+}
+.studio-intro .label, .studio-intro em { color: var(--color-champagne); }
+.studio-intro h1 { font-size: clamp(4.5rem, 8.4vw, 9rem); margin-block: .32em; letter-spacing: -.05em; }
+.studio-deck { max-width: 37ch; color: #ded5c9; line-height: 1.65; }
+.studio-cta, .studio-foot a { display: inline-flex; align-items: center; gap: 1rem; min-height: 44px; }
+.studio-cta { background: var(--color-cream); color: var(--color-ink); border-radius: 99px; padding: .85rem 1.45rem; margin-top: 1.6rem; }
+.studio-hero a:focus-visible { outline-color: var(--color-champagne); }
+.studio-plate { position: relative; padding: clamp(9px, 1vw, 18px); border: 1px solid #ceb88865; }
+.studio-photo { position: relative; overflow: hidden; aspect-ratio: 5/4; }
+.studio-plate figcaption { margin-top: .75em; font: italic 1.05rem var(--font-display); color: #eddfc6; }
+.studio-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .65rem; border-top: 1px solid #ceb88845; font-size: .8rem; }
+@media (min-width: 800px) {
+  .studio-cover { grid-template-columns: .9fr 1.1fr; min-height: min(91svh, 1000px); }
+  .studio-photo { aspect-ratio: 1.12; }
+}
+@keyframes cover-drift { from { transform: scale(1.13) translateY(-3%); } to { transform: scale(1.13) translateY(4%); } }
+@keyframes mount-turn { from { rotate: -3deg; } to { rotate: 1deg; } }
+@keyframes chapter-draw { from { scale: 0 1; } to { scale: 1 1; } }
+@keyframes title-settle { from { translate: 0 .32em; } to { translate: 0 0; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .studio-hero { view-timeline-name: --cover; }
+    .studio-photo img, .studio-plate {
+      animation: cover-drift linear both;
+      animation-timeline: --cover;
+      animation-range: exit 0% exit 100%;
+    }
+    .studio-plate { animation-name: mount-turn; }
+    main :where(h2.display, h2.vx-serif) {
+      animation: title-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+    main .chapter-rule { position: relative; view-timeline-name: --chapter; }
+    main .chapter-rule::before {
+      content: ""; position: absolute; inset: -1px 0 auto; height: 1px;
+      background: var(--color-gold-text); transform-origin: left;
+      animation: chapter-draw linear both;
+      animation-timeline: --chapter;
+      animation-range: entry 0% entry 95%;
+    }
+  }
+}
