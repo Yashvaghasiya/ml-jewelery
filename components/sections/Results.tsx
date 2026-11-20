@@ -2,9 +2,7 @@
 
 import { animate, useInView } from "motion/react";
 import { useEffect, useRef } from "react";
-import { stats } from "@/lib/site";
-import { Reveal, SectionLabel } from "@/components/ui/Reveal";
-import { SampleNote } from "@/components/ui/Sample";
+import { site, stats } from "@/lib/site";
 
 function Count({ to, decimals = 0, suffix }: { to: number; decimals?: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -30,28 +28,18 @@ function Count({ to, decimals = 0, suffix }: { to: number; decimals?: number; su
 
 export default function Results() {
   return (
-    <section data-header="light" className="section border-t border-line-light">
-      <div className="container-x">
-        <div className="editorial-grid items-end">
-          <div className="col-span-4 md:col-span-4"><SectionLabel no="05">Beyond the image</SectionLabel></div>
-          <h2 className="display display-lg col-span-4 max-w-3xl md:col-span-8">
-            What the work does <em className="text-taupe">after</em> the shoot.
-          </h2>
-        </div>
-        <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.06} className="flex flex-col-reverse border-t border-line-light pt-8">
-              <dt className="mt-4 text-sm text-taupe">{s.label}</dt>
-              <dd className="display display-xl leading-none">
-                <Count to={s.value} decimals={s.decimals} suffix={s.suffix} />
-              </dd>
-            </Reveal>
-          ))}
-        </dl>
-        <div className="flex justify-center">
-          <SampleNote>These figures are samples. Replace them with your real results before launch.</SampleNote>
-        </div>
-      </div>
+    <section className="studio-ledger" aria-labelledby="results-title">
+      <p className="edition-label">Studio figures</p>
+      <h2 id="results-title" className="edition-title">In <em>numbers.</em></h2>
+      {site.sampleContent && <p className="ledger-note">Illustrative figures · sample results</p>}
+      <dl>
+        {stats.map(stat => (
+          <div key={stat.label}>
+            <dt>{stat.label}</dt>
+            <dd><Count to={stat.value} decimals={stat.decimals} suffix={stat.suffix} /></dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

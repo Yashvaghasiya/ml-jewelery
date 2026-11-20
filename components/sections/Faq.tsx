@@ -1,6 +1,7 @@
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import { faq } from "@/lib/site";
-import { MaskLines, Reveal, SectionLabel } from "@/components/ui/Reveal";
+import Image from "next/image";
+import { images } from "@/lib/images";
 
 const SPLIT = /(\{\{.*?\}\})/; // capture group keeps the placeholders in the split result
 const IS_PLACEHOLDER = /^\{\{.*\}\}$/;
@@ -31,39 +32,24 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" data-header="light" className="section border-t border-line-light">
-      <div className="container-x grid gap-12 md:grid-cols-12">
-        <div className="md:col-span-4">
-          <div className="md:sticky md:top-32">
-          <SectionLabel no="08">The finer details</SectionLabel>
-          <h2 className="display display-lg mt-6">
-            <MaskLines lines={["Questions brands", "ask us first."]} />
-          </h2>
-          <Reveal>
-            <p className="mt-6 max-w-sm text-base text-taupe">
-              Something else on your mind? Ask it in the brief below and we answer within one working day.
-            </p>
-          </Reveal>
+    <section id="faq" data-header="light" className="studio-faq" aria-labelledby="faq-title">
+      <div className="edition-wrap faq-spread">
+        <div className="faq-intro">
+          <p className="edition-label">Questions &amp; answers</p>
+          <h2 className="edition-title" id="faq-title">Before <br /><em>the shoot.</em></h2>
+          <div className="faq-still">
+            <Image src={images.services.ads[0].src} alt={images.services.social[7].alt} fill sizes="(min-width: 800px) 19vw, 0px" className="object-cover" />
           </div>
+          <a className="edition-link" href="#contact">Ask the studio <span aria-hidden>↓</span></a>
         </div>
-
-        <Reveal className="md:col-span-7 md:col-start-6">
-          <div className="border-t border-line-light">
-            {faq.map((f) => (
-              <details key={f.q} className="group border-b border-line-light">
-                <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-medium transition-colors hover:text-taupe [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-light transition-[transform,background-color,border-color] duration-500 group-open:rotate-45 group-open:border-ink group-open:bg-ink group-open:text-ivory" aria-hidden>
-                    <PlusIcon className="h-4 w-4" />
-                  </span>
-                </summary>
-                <p className="faq-answer max-w-2xl pb-6 text-base text-taupe">
-                  <Answer text={f.a} />
-                </p>
-              </details>
-            ))}
-          </div>
-        </Reveal>
+        <div className="faq-index">
+          {faq.map(f => (
+            <details key={f.q}>
+              <summary>{f.q}<PlusIcon size={19} aria-hidden /></summary>
+              <p className="faq-answer"><Answer text={f.a} /></p>
+            </details>
+          ))}
+        </div>
       </div>
       {complete && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />}
     </section>

@@ -11,19 +11,25 @@ import Faq from "@/components/sections/Faq";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
+import "./landing.css";
+
 export default function Home() {
   return (
     <>
       <Header />
-      <main id="main">
+      <main id="main" className="studio-home">
         <Hero />
         <Statement />
         <SelectedWork />
         <Atelier />
         <ServiceJourney />
-        <Results />
         <Process />
-        <Testimonials />
+        <div className="studio-record" data-header="light">
+          <div className="edition-wrap record-spread">
+            <Results />
+            <Testimonials />
+          </div>
+        </div>
         <Faq />
         <Contact />
       </main>

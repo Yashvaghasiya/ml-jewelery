@@ -79,7 +79,6 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [menu, lenis, catOpen]);
 
-  // Every landing section is light now; the dark styles remain for any future dark section.
   const onDark = dark && !menu;
 
   return (
@@ -89,7 +88,7 @@ export default function Header() {
           onDark ? "border-ivory/10 bg-onyx/70 text-ivory" : "border-ink/10 bg-ivory/75 text-ink"
         }`}
       >
-        <a href="#top" className="flex items-baseline gap-2" aria-label={`${site.brand} home`}>
+        <a href="#hero" className="flex items-baseline gap-2" aria-label={`${site.brand} home`}>
           <span className="display text-3xl leading-none">{site.brand}</span>
           <span className={`label hidden sm:inline ${onDark ? "text-champagne" : "text-taupe"}`}>Studio</span>
         </a>

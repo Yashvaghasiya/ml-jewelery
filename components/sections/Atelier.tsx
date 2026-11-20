@@ -1,32 +1,130 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useLenis } from "lenis/react";
 import { atelier } from "@/lib/site";
-import { EASE_LUXE, MaskLines, Reveal, SectionLabel } from "@/components/ui/Reveal";
+
+const scrollLayout = "(min-width: 900px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
+
+function ProofPrint({ index, active, scrollable, progress }: {
+  index: number;
+  active: number;
+  scrollable: boolean;
+  progress: MotionValue<number>;
+}) {
+  const frame = atelier[index];
+  const tilt = index % 2 === 0 ? -2 : 2;
+  // Hold each print for reading, then lift it off to expose the next print underneath.
+  const turn = useTransform(progress, value => Math.min(1, Math.max(0, (value * (atelier.length - 1) - index - 0.23) / 0.63)));
+  const rotate = useTransform(turn, [0, 1], [tilt, tilt + 13]);
+  const x = useTransform(turn, [0, 1], ["0%", "104%"]);
+  const y = useTransform(turn, [0, 1], ["0%", "-14%"]);
+  const opacity = useTransform(turn, [0, 0.78, 1], [1, 1, 0]);
+  return (
+    <motion.figure
+      className="proof-print"
+      aria-hidden={index !== active}
+      style={{
+        zIndex: atelier.length - index,
+        rotate: scrollable ? rotate : tilt,
+        x: scrollable ? x : 0,
+        y: scrollable ? y : 0,
+        opacity: scrollable ? opacity : Number(index >= active),
+      }}
+    >
+      <div className="proof-negative">
+        <Image src={frame.image.src} alt={frame.image.alt} fill sizes="(min-width: 800px) 49vw, 88vw" className="object-cover" />
+      </div>
+      <figcaption>
+        <span>{String(index + 1).padStart(2, "0")} / {String(atelier.length).padStart(2, "0")}</span>
+        <p>{frame.line}</p>
+      </figcaption>
+    </motion.figure>
+  );
+}
 
 export default function Atelier() {
   const [active, setActive] = useState(0);
-  const reduced = useReducedMotion();
+  const [scrollable, setScrollable] = useState(false);
+  const section = useRef<HTMLElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const lenis = useLenis();
+  const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
+
+  useEffect(() => {
+    const media = window.matchMedia(scrollLayout);
+    const update = () => {
+      setScrollable(media.matches);
+      if (media.matches) setActive(Math.round(scrollYProgress.get() * (atelier.length - 1)));
+    };
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [scrollYProgress]);
+
+  useMotionValueEvent(scrollYProgress, "change", value => {
+    if (scrollable) setActive(Math.round(value * (atelier.length - 1)));
+  });
+
+  function select(index: number) {
+    setActive(index);
+    if (!scrollable || !section.current || !stage.current) return;
+    const range = section.current.offsetHeight - stage.current.offsetHeight;
+    const top = section.current.getBoundingClientRect().top + window.scrollY;
+    const target = top + range * index / (atelier.length - 1);
+    if (lenis) lenis.scrollTo(target, { immediate: true });
+    else window.scrollTo({ top: target, behavior: "instant" });
+  }
+
+  function navigate(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let next = index;
+    switch (event.key) {
+      case "ArrowRight": next = (index + 1) % atelier.length; break;
+      case "ArrowLeft": next = (index - 1 + atelier.length) % atelier.length; break;
+      case "Home": next = 0; break;
+      case "End": next = atelier.length - 1; break;
+      default: return;
+    }
+    event.preventDefault();
+    select(next);
+    tabs.current[next]?.focus({ preventScroll: true });
+  }
+
   return (
-    <section id="atelier" data-header="light" className="section border-y border-line-light bg-cream/40">
-      <div className="container-x editorial-grid items-center">
-        <div className="col-span-4 md:col-span-5">
-          <SectionLabel no="03">Inside the atelier</SectionLabel>
-          <h2 className="display display-xl mt-8"><MaskLines lines={["The art of", <em key="closer">looking closer.</em>]} /></h2>
-          <p className="mt-8 max-w-sm text-lg text-taupe">A change of light. A different angle. A story waiting in the smallest detail.</p>
-          <div className="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Atelier stages">{atelier.map((stage, i) => <button key={stage.label} id={`stage-tab-${i}`} role="tab" aria-selected={active === i} aria-controls="stage-panel" tabIndex={active === i ? 0 : -1} onClick={() => setActive(i)} onKeyDown={(e) => { const next = e.key === "ArrowRight" ? (i + 1) % atelier.length : e.key === "ArrowLeft" ? (i - 1 + atelier.length) % atelier.length : e.key === "Home" ? 0 : e.key === "End" ? atelier.length - 1 : -1; if (next >= 0) { e.preventDefault(); setActive(next); document.getElementById(`stage-tab-${next}`)?.focus(); } }} className="chip active:scale-[0.98]">{stage.label}</button>)}</div>
-          <p className="mt-5 text-xs text-taupe">Select a stage to explore the process.</p>
-        </div>
-        <Reveal className="col-span-4 mt-8 md:col-span-6 md:col-start-7 md:mt-0">
-          <div id="stage-panel" role="tabpanel" aria-labelledby={`stage-tab-${active}`} tabIndex={0}>
-            <div className="photo-frame aspect-[4/5]">
-              <AnimatePresence initial={false}><motion.div key={active} className="absolute inset-0" initial={{ opacity: 0, scale: reduced ? 1 : 1.035 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : 0.4, ease: EASE_LUXE }}><Image src={atelier[active].image.src} alt={atelier[active].image.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" /></motion.div></AnimatePresence>
+    <section ref={section} id="atelier" data-header="light" className="light-table" aria-labelledby="atelier-title">
+      <div ref={stage} className="table-stage">
+        <div className="edition-wrap table-spread">
+          <div className="table-intro">
+            <p className="edition-label">Inside the atelier</p>
+            <h2 className="edition-title" id="atelier-title">Through<br /><em>the lens.</em></h2>
+            <p className="edition-body">Four ways to frame a collection, from the facets of a single stone to a portrait for the campaign.</p>
+            <div role="tablist" aria-label="Atelier stages" className="table-tabs">
+              {atelier.map((item, i) => (
+                <button
+                  key={item.label}
+                  ref={el => { tabs.current[i] = el; }}
+                  id={`stage-tab-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={active === i}
+                  aria-controls="stage-panel"
+                  tabIndex={active === i ? 0 : -1}
+                  onClick={() => select(i)}
+                  onKeyDown={event => navigate(event, i)}
+                >
+                  <span className="table-thumb"><Image src={item.image.src} alt="" fill sizes="92px" className="object-cover" /></span>
+                  {item.label}
+                </button>
+              ))}
             </div>
-            <div className="mt-5 flex gap-6 border-b border-line-light pb-6"><span className="text-sm text-taupe tabular-nums">0{active + 1} / 0{atelier.length}</span><p className="flex-1 text-base" aria-live="polite">{atelier[active].line}</p></div>
           </div>
-        </Reveal>
+          <div id="stage-panel" className="proof-stack" role="tabpanel" aria-labelledby={`stage-tab-${active}`} tabIndex={0}>
+            {atelier.map((item, index) => <ProofPrint key={item.label} index={index} active={active} scrollable={scrollable} progress={scrollYProgress} />)}
+          </div>
+        </div>
       </div>
     </section>
   );
