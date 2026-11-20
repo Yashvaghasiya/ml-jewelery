@@ -1,6 +1,41 @@
+import Image from "next/image";
+import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { images } from "@/lib/images";
 import { process } from "@/lib/site";
-import { MaskLines, Reveal, SectionLabel } from "@/components/ui/Reveal";
+
+const frames = [
+  images.portfolio[7],
+  images.portfolio[5],
+  images.services.photography[1],
+  images.portfolio[6],
+];
 
 export default function Process() {
-  return <section id="process" data-header="light" className="section border-t border-line-light"><div className="container-x editorial-grid"><div className="col-span-4 md:col-span-5"><div className="md:sticky md:top-32"><SectionLabel no="06">The process</SectionLabel><h2 className="display display-xl mt-8"><MaskLines lines={["From a spark", <em key="story">to a story.</em>]} /></h2><p className="mt-8 max-w-sm text-lg text-taupe">A clear creative direction. A considered production. A collection ready for its audience.</p><a href="/start-a-project" className="editorial-link mt-6">Let’s find your starting point ↗</a></div></div><div className="col-span-4 mt-8 md:col-span-6 md:col-start-7 md:mt-0">{process.map((step, i) => <Reveal key={step.no} className="grid grid-cols-[64px_1fr] gap-6 border-t border-line-light py-10 md:grid-cols-[96px_1fr] md:py-14"><span className="display display-lg text-taupe tabular-nums">0{i + 1}</span><div><p className="label text-taupe">Chapter {step.no}</p><h3 className="display display-md mt-4">{step.title}</h3><p className="mt-5 max-w-md text-base text-taupe">{step.line}</p></div></Reveal>)}</div></div></section>;
+  return (
+    <section id="process" data-header="light" className="storyboard" aria-labelledby="process-title">
+      <div className="edition-wrap">
+        <header className="storyboard-head">
+          <div>
+            <p className="edition-label">The process</p>
+            <h2 id="process-title" className="edition-title">On the <em>shoot list.</em></h2>
+          </div>
+          <a href="/start-a-project" className="edition-link">Discuss your brief <ArrowUpRightIcon aria-hidden /></a>
+        </header>
+        <ol className="storyboard-frames">
+          {process.map((step, i) => (
+            <li key={step.no}>
+              <div className="story-still">
+                <Image src={frames[i].src} alt={frames[i].alt} fill sizes="(min-width: 800px) 23vw, 40vw" className="object-cover" />
+              </div>
+              <div className="story-caption">
+                <span className="story-number" aria-hidden>{step.no}</span>
+                <h3>{step.title}</h3>
+                <p>{step.line}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
 }

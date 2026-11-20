@@ -1,32 +1,74 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
-import { SectionLabel } from "@/components/ui/Reveal";
+import { MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon } from "@phosphor-icons/react/dist/ssr";
+import { motion, useScroll, useTransform, type MotionStyle } from "motion/react";
+import { useRef, useState, type PointerEvent } from "react";
+import { images } from "@/lib/images";
 
-const words = "Not just seen. Felt. Remembered. Desired.".split(" ");
-function Word({ word, index, progress, reduced }: { word: string; index: number; progress: MotionValue<number>; reduced: boolean | null }) {
-  const opacity = useTransform(progress, [index / words.length, (index + 1) / words.length], [0.22, 1]);
-  const y = useTransform(progress, [index / words.length, (index + 1) / words.length], [8, 0]);
-  return <motion.span style={{ opacity: reduced ? 1 : opacity, y: reduced ? 0 : y }} className={`inline-block ${index >= 3 ? "italic" : ""}`}>{word}&nbsp;</motion.span>;
-}
+const still = images.services.social[1];
+const sizes = "(min-width: 800px) 43vw, 90vw";
+
 export default function Statement() {
-  const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 70%"] });
-  const strip = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: stripProgress } = useScroll({ target: strip, offset: ["start end", "end start"] });
-  const x = useTransform(stripProgress, [0, 1], ["0%", "-18%"]);
-  return <section ref={ref} className="section" data-header="light"><div className="container-x editorial-grid chapter-rule"><div className="col-span-4 md:col-span-3"><SectionLabel no="01">Our point of view</SectionLabel></div><div className="col-span-4 md:col-span-9"><h2 className="display display-xl max-w-[15ch]">{words.map((word, index) => <Word key={index} word={word} index={index} progress={scrollYProgress} reduced={reduced} />)}</h2><div className="mt-10 grid gap-6 md:grid-cols-2"><p className="max-w-md text-lg text-taupe">The weight of gold. The way a diamond catches the light. The feeling of finding something that is unmistakably yours.</p><p className="max-w-md text-base text-taupe">We translate those details into a visual world for your brand — with considered photography, storytelling and a consistent presence across every touchpoint.</p></div></div></div>
-    <div ref={strip} className="study-strip" aria-hidden>
-      <motion.div className="study-strand" style={{ x: reduced ? 0 : x }}>
-        {["03", "01", "06", "04", "08"].map(id => (
-          <div className="study-frame" key={id}>
-            <Image src={`/images/portfolio/${id}.webp`} alt="" fill sizes="(min-width: 800px) 26vw, 45vw" className="object-cover" />
+  const section = useRef<HTMLElement>(null);
+  const [magnified, setMagnified] = useState(true);
+  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
+  const scanX = useTransform(scrollYProgress, [0.15, 0.85], ["31%", "66%"]);
+  const scanY = useTransform(scrollYProgress, [0.15, 0.85], ["46%", "59%"]);
+
+  function inspect(event: PointerEvent<HTMLDivElement>) {
+    if (!magnified) return;
+    const plate = event.currentTarget;
+    const box = plate.getBoundingClientRect();
+    plate.style.setProperty("--pointer-x", `${100 * (event.clientX - box.left) / box.width}%`);
+    plate.style.setProperty("--pointer-y", `${100 * (event.clientY - box.top) / box.height}%`);
+  }
+
+  function resumeScan(event: PointerEvent<HTMLDivElement>) {
+    event.currentTarget.style.removeProperty("--pointer-x");
+    event.currentTarget.style.removeProperty("--pointer-y");
+  }
+
+  return (
+    <section ref={section} data-header="light" aria-labelledby="point-of-view" className="perspective">
+      <div className="edition-wrap perspective-spread">
+        <div className="perspective-copy">
+          <p className="edition-label">Our point of view</p>
+          <h2 id="point-of-view" className="edition-title">The weight <br /><em>of gold.</em></h2>
+          <p className="edition-body">A curve of polished metal. A stone catching the light. Those are the details we look for when we photograph a collection.</p>
+          <a href="#work" className="edition-link">Explore selected work <span aria-hidden>↓</span></a>
+        </div>
+        <motion.figure
+          className="loupe-print"
+          style={{ "--scan-x": scanX, "--scan-y": scanY } as MotionStyle}
+        >
+          <div
+            className="loupe-plate"
+            data-magnified={magnified}
+            onPointerDown={inspect}
+            onPointerMove={inspect}
+            onPointerLeave={resumeScan}
+            onPointerCancel={resumeScan}
+          >
+            <Image src={still.src} alt={still.alt} fill sizes={sizes} className="object-cover" />
+            {magnified && (
+              <>
+                <div aria-hidden className="loupe-detail">
+                  <Image src={still.src} alt="" fill sizes={sizes} className="object-cover" />
+                </div>
+                <div className="loupe-rim" aria-hidden />
+              </>
+            )}
           </div>
-        ))}
-      </motion.div>
-    </div>
-  </section>;
+          <figcaption>
+            <span>Gold hoops on paper</span>
+            <button type="button" aria-pressed={magnified} onClick={() => setMagnified(!magnified)}>
+              {magnified ? <MagnifyingGlassMinusIcon aria-hidden /> : <MagnifyingGlassPlusIcon aria-hidden />}
+              Loupe
+            </button>
+          </figcaption>
+        </motion.figure>
+      </div>
+    </section>
+  );
 }
