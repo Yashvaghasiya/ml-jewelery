@@ -20,7 +20,7 @@ export default function Testimonials() {
   return (
     <section data-header="light" className="section border-t border-line-light" aria-roledescription="carousel" aria-label="Client quotes">
       <div className="container-x flex flex-col items-center text-center">
-        <SectionLabel no="05">Clients</SectionLabel>
+        <SectionLabel no="07">In their words</SectionLabel>
         <figure className="mt-10 grid min-h-[22rem] w-full max-w-5xl place-items-center sm:min-h-[20rem]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -28,7 +28,7 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.6, ease: EASE_LUXE }}
+              transition={{ duration: 0.4, ease: EASE_LUXE }}
               aria-live="polite"
             >
               <blockquote className="display display-lg leading-[1.08]">“{t.quote}”</blockquote>

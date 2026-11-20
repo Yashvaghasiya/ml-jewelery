@@ -48,11 +48,21 @@ if (mode === "review") {
 } else if (mode === "build") {
   const out = "public/images/new";
   mkdirSync(out, { recursive: true });
+  let failed = 0;
   for (const pair of args) {
     const [slug, id] = pair.split("=");
-    const buf = await fetchPhoto(id, 2000);
-    await sharp(buf).resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true }).webp({ quality: 80 }).toFile(join(out, `${slug}.webp`));
-    console.log(`built ${slug} (pexels ${id})`);
+    try {
+      const buf = await fetchPhoto(id, 2000);
+      await sharp(buf).resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true }).webp({ quality: 80 }).toFile(join(out, `${slug}.webp`));
+      console.log(`built ${slug} (pexels ${id})`);
+    } catch (e) {
+      failed++;
+      console.log(`fail ${slug}  ${e.message}`);
+    }
+  }
+  if (failed) {
+    console.log(`${failed} of ${args.length} failed`);
+    process.exit(1);
   }
 } else {
   console.log("usage: fetch-work.mjs review <outDir> <ids...> | build <slug=id ...>");

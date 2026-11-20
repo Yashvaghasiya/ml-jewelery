@@ -1,4 +1,5 @@
 import PageBar from "./PageBar";
+import { MaskLines, Reveal } from "@/components/ui/Reveal";
 
 export type LegalSection = { heading: string; body: string };
 
@@ -21,29 +22,27 @@ function Text({ text }: { text: string }) {
   );
 }
 
-/** Shared layout for the privacy and terms pages: a simple bar back home and readable text. */
 export default function LegalPage({ title, updated, sections }: { title: string; updated: string; sections: LegalSection[] }) {
   return (
     <div className="min-h-svh bg-ivory text-ink">
       <PageBar />
-      <main id="main" className="container-x max-w-3xl py-16 md:py-24">
-        <p className="label text-taupe">Legal</p>
-        <h1 className="display mt-4 text-[clamp(2.6rem,6vw,4.5rem)]">{title}</h1>
-        <p className="mt-4 text-sm text-taupe">
-          Last updated: <Text text={updated} />
-        </p>
-        <p className="mt-8 rounded-lg border border-dashed border-taupe/40 bg-champagne/10 p-4 text-sm text-ink">
-          This is a starting template. Highlighted parts need your details, and the whole page should be reviewed by someone qualified before launch.
-        </p>
-        <div className="mt-12 space-y-10">
-          {sections.map((s) => (
-            <section key={s.heading}>
-              <h2 className="text-xl font-semibold">{s.heading}</h2>
-              <p className="mt-3 text-base text-taupe">
-                <Text text={s.body} />
-              </p>
-            </section>
-          ))}
+      <main id="main" className="container-x pb-24">
+        <header className="subpage-heading">
+          <p className="label text-taupe">Verdane Studio / Legal notes</p>
+          <h1 className="display display-hero mt-8 max-w-[12ch]"><MaskLines lines={[title]} /></h1>
+          <p className="mt-8 text-sm text-taupe">Last updated: <Text text={updated} /></p>
+        </header>
+        <div className="editorial-grid mt-12 md:mt-20">
+          <aside className="col-span-4 md:col-span-4">
+            <div className="md:sticky md:top-12">
+              <p className="label text-taupe">On this page</p>
+              <nav aria-label={`${title} contents`} className="mt-5 flex flex-col">{sections.map((s, i) => <a key={s.heading} href={`#legal-${i}`} className="flex min-h-11 items-center gap-4 border-b border-line-light py-3 text-sm hover:text-taupe active:opacity-70"><span className="text-xs text-taupe tabular-nums">{String(i + 1).padStart(2, "0")}</span>{s.heading}</a>)}</nav>
+              <p className="mt-8 border-l-2 border-champagne pl-4 text-sm text-taupe">This is a starting template. Highlighted parts need your details, and the whole page should be reviewed by someone qualified before launch.</p>
+            </div>
+          </aside>
+          <div className="col-span-4 mt-8 md:col-span-7 md:col-start-6 md:mt-0">
+            {sections.map((s, i) => <Reveal key={s.heading}><section id={`legal-${i}`} className="scroll-mt-10 border-t border-line-light pb-12 pt-6"><p className="label text-taupe">{String(i + 1).padStart(2, "0")}</p><h2 className="display display-md mt-4">{s.heading}</h2><p className="mt-6 max-w-[65ch] text-base leading-relaxed text-taupe"><Text text={s.body} /></p></section></Reveal>)}
+          </div>
         </div>
       </main>
     </div>

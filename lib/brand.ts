@@ -8,7 +8,7 @@ export type BrandColour = {
   pantone: string;
   hex: string;
   role: string;
-  group: "Base" | "Dark" | "Accent" | "Support";
+  group: "Base" | "Dark" | "Accent" | "Support" | "Derived";
 };
 
 export const palette: BrandColour[] = [
@@ -20,6 +20,9 @@ export const palette: BrandColour[] = [
   { token: "champagne-deep", name: "Deep champagne", pantone: "PANTONE 7503 C", hex: "#A89968", role: "Decorative detail; text only on dark backgrounds.", group: "Accent" },
   { token: "taupe", name: "Taupe", pantone: "PANTONE Warm Gray 11 C", hex: "#6E6259", role: "Secondary text and labels on light backgrounds.", group: "Support" },
   { token: "greige", name: "Greige", pantone: "PANTONE Warm Gray 2 C", hex: "#CBC4BC", role: "Secondary text on dark backgrounds.", group: "Support" },
+  { token: "champagne-tint", name: "Champagne tint", pantone: "HCT T90 of PANTONE 7502 C", hex: "#F8E0AD", role: "Soft champagne tint for text and detail on dark surfaces; 11.2:1 on onyx.", group: "Derived" },
+  { token: "gold-text", name: "Accessible gold", pantone: "HCT T40 of PANTONE 7502 C", hex: "#6D5C34", role: "Champagne-hued small text, labels and focus rings on light surfaces; 5.7:1 on ivory.", group: "Derived" },
+  { token: "gold-line", name: "Gold hairline", pantone: "HCT T30 of PANTONE 7502 C", hex: "#54451F", role: "Warm hairlines, borders and progress indicators on light surfaces; 8.2:1 on ivory.", group: "Derived" },
 ];
 
 export const hexToRgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
@@ -50,5 +53,8 @@ export const pairs = (
     ["greige", "onyx"],
     ["champagne-deep", "onyx"],
     ["onyx", "champagne"],
+    ["gold-text", "ivory"],
+    ["gold-line", "ivory"],
+    ["champagne-tint", "onyx"],
   ] as const
 ).map(([fg, bg]) => ({ fg: byToken(fg), bg: byToken(bg), ratio: contrast(byToken(fg).hex, byToken(bg).hex) }));

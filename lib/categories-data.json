@@ -1,0 +1,611 @@
+[
+  {
+    "slug": "rings",
+    "name": "Rings",
+    "blurb": "Solitaires, bands and statement rings, shot macro-first.",
+    "images": [
+      {
+        "src": "/images/categories/rings/rings-01.webp",
+        "alt": "Golddiamondring",
+        "credit": "Mauro Cateb - brazilian jeweler · CC0 · https://commons.wikimedia.org/wiki/File:Golddiamondring.JPG"
+      },
+      {
+        "src": "/images/categories/rings/rings-02.webp",
+        "alt": "Silver and citrine rings.",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_citrine_rings..jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-03.webp",
+        "alt": "Amethyst and silver ring",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Amethyst_and_silver_ring.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-04.webp",
+        "alt": "Brazilian blue topaz ring",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Brazilian_blue_topaz_ring.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-05.webp",
+        "alt": "Silver and lazurite rings",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_lazurite_rings.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-06.webp",
+        "alt": "Silver and moonstone ring",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_moonstone_ring.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-07.webp",
+        "alt": "Silver and turquoise rings",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_turquoise_rings.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-08.webp",
+        "alt": "Smoky quartz ring",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Smoky_quartz_ring.jpg"
+      },
+      {
+        "src": "/images/categories/rings/rings-09.webp",
+        "alt": "Oval citrine and silver ring",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Oval_citrine_and_silver_ring.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "necklaces",
+    "name": "Necklaces",
+    "blurb": "Chokers, collars and rani haars with true metal tones.",
+    "images": [
+      {
+        "src": "/images/categories/necklaces/necklaces-01.webp",
+        "alt": "Silver and quartz necklace",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_quartz_necklace.jpg"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-02.webp",
+        "alt": "Gold and pearls neckband",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gold_and_pearls_neckband.JPG"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-03.webp",
+        "alt": "Akoya pearls",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Akoya_pearls.JPG"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-04.webp",
+        "alt": "Keshi pearls",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Keshi_pearls.JPG"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-05.webp",
+        "alt": "Keshi pearls - detail",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Keshi_pearls_-_detail.JPG"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-06.webp",
+        "alt": "Pearl necklace",
+        "credit": "Mauro Cateb · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Pearl_necklace.jpg"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-07.webp",
+        "alt": "WLA hmns Amethyst and Diamond necklace 2",
+        "credit": "Wikipedia Loves Art participant \"Assignment_Houston_One\" · CC BY-SA 2.5 · https://commons.wikimedia.org/wiki/File:WLA_hmns_Amethyst_and_Diamond_necklace_2.jpg"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-08.webp",
+        "alt": "Amethyst & Diamond Necklace",
+        "credit": "Ernesto Moreira · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Amethyst_%26_Diamond_Necklace.jpg"
+      },
+      {
+        "src": "/images/categories/necklaces/necklaces-09.webp",
+        "alt": "Garnet & Diamond Necklace (4739802024)",
+        "credit": "Ed Uthman from Houston, TX, USA · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Garnet_%26_Diamond_Necklace_(4739802024).jpg"
+      }
+    ]
+  },
+  {
+    "slug": "earrings",
+    "name": "Earrings",
+    "blurb": "Studs, jhumkas and hoops that hold their shape on every placement.",
+    "images": [
+      {
+        "src": "/images/categories/earrings/earrings-01.webp",
+        "alt": "Gold and quartz earrings",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gold_and_quartz_earrings.jpg"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-02.webp",
+        "alt": "Gold and pearls earrings.",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gold_and_pearls_earrings..jpg"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-03.webp",
+        "alt": "White gold and diamonds earrings",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:White_gold_and_diamonds_earrings.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-04.webp",
+        "alt": "Pearls and gold earrings",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Pearls_and_gold_earrings.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-05.webp",
+        "alt": "Earrings 1",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Earrings_1.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-06.webp",
+        "alt": "Earrings 2",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Earrings_2.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-07.webp",
+        "alt": "Earrings 3",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Earrings_3.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-08.webp",
+        "alt": "Earrings 4",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Earrings_4.JPG"
+      },
+      {
+        "src": "/images/categories/earrings/earrings-09.webp",
+        "alt": "Silver earrings for men",
+        "credit": "Mauro Cateb · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Silver_earrings_for_men.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "bangles",
+    "name": "Bangles & Bracelets",
+    "blurb": "Kadas, bangles and cuffs, on wrist and on set.",
+    "images": [
+      {
+        "src": "/images/categories/bangles/bangles-01.webp",
+        "alt": "Bronze Age gold banglesDSCF6609",
+        "credit": "Johnbod · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Bronze_Age_gold_banglesDSCF6609.jpg"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-02.webp",
+        "alt": "Pair of Bangles",
+        "credit": "Anton Croos · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Pair_of_Bangles.JPG"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-03.webp",
+        "alt": "Bangle",
+        "credit": "Anton Croos · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Bangle.JPG"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-04.webp",
+        "alt": "Bangle (for girls)",
+        "credit": "Anton Croos · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Bangle_(for_girls).JPG"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-05.webp",
+        "alt": "4 bangles",
+        "credit": "Bhaskaranaidu · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:4_bangles.JPG"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-06.webp",
+        "alt": "Gold griffen bangle from the Oxus treasure (9080188474)",
+        "credit": "Paul Hudson from United Kingdom · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Gold_griffen_bangle_from_the_Oxus_treasure_(9080188474).jpg"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-07.webp",
+        "alt": "Roman Greek Gold Bangles, 1st-4th Cent. AD (27859852413)",
+        "credit": "Gary Todd from Xinzheng, China · CC0 · https://commons.wikimedia.org/wiki/File:Roman_Greek_Gold_Bangles,_1st-4th_Cent._AD_(27859852413).jpg"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-08.webp",
+        "alt": "916 Bangles",
+        "credit": "Sri Veerabadra Jewellers · CC0 · https://commons.wikimedia.org/wiki/File:916_Bangles.jpg"
+      },
+      {
+        "src": "/images/categories/bangles/bangles-09.webp",
+        "alt": "Gold bangles with intricate patterns in a jewelry display Bangladesh 01",
+        "credit": "A S M Jobaer · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Gold_bangles_with_intricate_patterns_in_a_jewelry_display_Bangladesh_01.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "bridal",
+    "name": "Bridal Sets",
+    "blurb": "Full bridal stories — necklace, tikka, nath and all.",
+    "images": [
+      {
+        "src": "/images/categories/bridal/bridal-01.webp",
+        "alt": "Bridal gold jewellery in Bangladeshi wedding",
+        "credit": "Syed Sajidul Islam · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Bridal_gold_jewellery_in_Bangladeshi_wedding.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-02.webp",
+        "alt": "Happy bride with Indian bridal jewellery IMG 3589",
+        "credit": "Sumita Roy Dutta · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Happy_bride_with_Indian_bridal_jewellery_IMG_3589.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-03.webp",
+        "alt": "Bride with Indian bridal jewellery IMG 3584",
+        "credit": "Sumita Roy Dutta · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Bride_with_Indian_bridal_jewellery_IMG_3584.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-04.webp",
+        "alt": "Happy bride with Indian bridal jewellery IMG 3597",
+        "credit": "Sumita Roy Dutta · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Happy_bride_with_Indian_bridal_jewellery_IMG_3597.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-05.webp",
+        "alt": "Bride by prakhar",
+        "credit": "Prakhar Amba from Grenoble, France · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Bride_by_prakhar.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-06.webp",
+        "alt": "Indian girl with Maang Tika IMG 4606",
+        "credit": "Sumita Roy Dutta · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Indian_girl_with_Maang_Tika_IMG_4606.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-07.webp",
+        "alt": "Traditsiooniline India pruudi kaelaehe",
+        "credit": "Arendaja · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Traditsiooniline_India_pruudi_kaelaehe.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-08.webp",
+        "alt": "Oppana - traditional dance of Muslim community - India",
+        "credit": "TAPAS KUMAR HALDER · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Oppana_-_traditional_dance_of_Muslim_community_-_India.jpg"
+      },
+      {
+        "src": "/images/categories/bridal/bridal-09.webp",
+        "alt": "Maang Tikka",
+        "credit": "Nandhini Subramaniyan · CC BY 4.0 · https://commons.wikimedia.org/wiki/File:Maang_Tikka.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "chains",
+    "name": "Chains",
+    "blurb": "Chains and links catalogued at scale, every clasp in focus.",
+    "images": [
+      {
+        "src": "/images/categories/chains/chains-01.webp",
+        "alt": "Antique gold compass (Unsplash)",
+        "credit": "Barby Dalbosco barbydalbosco · CC0 · https://commons.wikimedia.org/wiki/File:Antique_gold_compass_(Unsplash).jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-02.webp",
+        "alt": "Golden - Flickr - Clearly Ambiguous",
+        "credit": "Scott Robinson from Rockville, MD, USA · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Golden_-_Flickr_-_Clearly_Ambiguous.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-03.webp",
+        "alt": "Chain pearl necklace",
+        "credit": "Durova · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Chain_pearl_necklace.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-04.webp",
+        "alt": "Necklace",
+        "credit": "Sana'ani · Public domain · https://commons.wikimedia.org/wiki/File:Sana_-_Necklace_-_Walters_572315.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-05.webp",
+        "alt": "Necklace",
+        "credit": "Wikimedia Commons contributor · Public domain · https://commons.wikimedia.org/wiki/File:Necklace_LACMA_M.85.286.6.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-06.webp",
+        "alt": "Silver chain (17th c., Kremlin) by shakko",
+        "credit": "Shakko · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Silver_chain_(17th_c.,_Kremlin)_by_shakko.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-07.webp",
+        "alt": "Necklace, chain",
+        "credit": "Wikimedia Commons contributor · CC0 · https://commons.wikimedia.org/wiki/File:Necklace,_chain_MET_sf9515260.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-08.webp",
+        "alt": "Necklace, chain",
+        "credit": "Wikimedia Commons contributor · CC0 · https://commons.wikimedia.org/wiki/File:Necklace,_chain_MET_sf951617color.jpg"
+      },
+      {
+        "src": "/images/categories/chains/chains-09.webp",
+        "alt": "Necklace, chain",
+        "credit": "Wikimedia Commons contributor · CC0 · https://commons.wikimedia.org/wiki/File:Necklace,_chain_MET_SF2213969.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "pendants",
+    "name": "Pendants",
+    "blurb": "Pendants and lockets lifted by controlled highlights.",
+    "images": [
+      {
+        "src": "/images/categories/pendants/pendants-01.webp",
+        "alt": "Westie terrier gold pendant.",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Westie_terrier_gold_pendant..jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-02.webp",
+        "alt": "Silver and topaz pendants",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_topaz_pendants.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-03.webp",
+        "alt": "Gold pendant",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gold_pendant.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-04.webp",
+        "alt": "Silver and topaz pendant",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_and_topaz_pendant.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-05.webp",
+        "alt": "Gold and quartz pendant",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gold_and_quartz_pendant.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-06.webp",
+        "alt": "Turquoise and silver pendant",
+        "credit": "Mauro Cateb · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Turquoise_and_silver_pendant.JPG"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-07.webp",
+        "alt": "Blue topaz pendant 02",
+        "credit": "Mauro Cateb · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Blue_topaz_pendant_02.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-08.webp",
+        "alt": "Blue topaz pendant 01",
+        "credit": "Mauro Cateb · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Blue_topaz_pendant_01.jpg"
+      },
+      {
+        "src": "/images/categories/pendants/pendants-09.webp",
+        "alt": "Gold strap necklace with seedlike pendants",
+        "credit": "Wikimedia Commons contributor · CC0 · https://commons.wikimedia.org/wiki/File:Gold_strap_necklace_with_seedlike_pendants_MET_sf9924.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "pearls",
+    "name": "Pearls",
+    "blurb": "Pearl strands graded clean, no false colour.",
+    "images": [
+      {
+        "src": "/images/categories/pearls/pearls-01.webp",
+        "alt": "House of Bolin pearl bracelet",
+        "credit": "Wikimedia Commons contributor · Public domain · https://commons.wikimedia.org/wiki/File:House_of_Bolin_pearl_bracelet.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-02.webp",
+        "alt": "Blue and white bracelet with pearls and diamonds",
+        "credit": "Wikimedia Commons contributor · Public domain · https://commons.wikimedia.org/wiki/File:Blue_and_white_bracelet_with_pearls_and_diamonds.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-03.webp",
+        "alt": "Blue white and gold bracelet",
+        "credit": "Wikimedia Commons contributor · Public domain · https://commons.wikimedia.org/wiki/File:Blue_white_and_gold_bracelet.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-04.webp",
+        "alt": "Blue, white and gold bracelet with large pearl",
+        "credit": "Wikimedia Commons contributor · Public domain · https://commons.wikimedia.org/wiki/File:Blue,_white_and_gold_bracelet_with_large_pearl.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-05.webp",
+        "alt": "Istanbul Pearls Jewels from the Sea Exhibition Lady Rosebery Pearl Tiara 1878 in 2015 21 6517",
+        "credit": "Dosseman · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Istanbul_Pearls_Jewels_from_the_Sea_Exhibition_Lady_Rosebery_Pearl_Tiara_1878_in_2015_21_6517.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-06.webp",
+        "alt": "Istanbul Pearls Jewels from the Sea Exhibition Lady Rosebery Pearl Tiara 1878 in 2015 20 6516",
+        "credit": "Dosseman · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Istanbul_Pearls_Jewels_from_the_Sea_Exhibition_Lady_Rosebery_Pearl_Tiara_1878_in_2015_20_6516.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-07.webp",
+        "alt": "Istanbul Pearls Jewels from the Sea Exhibition Lady Rosebery Pearl Tiara 1878 in 2015 18 6509",
+        "credit": "Dosseman · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Istanbul_Pearls_Jewels_from_the_Sea_Exhibition_Lady_Rosebery_Pearl_Tiara_1878_in_2015_18_6509.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-08.webp",
+        "alt": "Satlada",
+        "credit": "Barunghosh · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Satlada.jpg"
+      },
+      {
+        "src": "/images/categories/pearls/pearls-09.webp",
+        "alt": "Strand-of-akoya-pearls",
+        "credit": "Effisk at English Wikipedia · Public domain · https://commons.wikimedia.org/wiki/File:Strand-of-akoya-pearls.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "kundan",
+    "name": "Kundan & Polki",
+    "blurb": "Heritage kundan and polki pieces, lit like the vitrine.",
+    "images": [
+      {
+        "src": "/images/categories/kundan/kundan-01.webp",
+        "alt": "WLA haa Gold belt Tamil Oddiyanam",
+        "credit": "Wikipedia Loves Art participant \"wiki_wiki_whaaat\" · CC BY-SA 2.5 · https://commons.wikimedia.org/wiki/File:WLA_haa_Gold_belt_Tamil_Oddiyanam.jpg"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-02.webp",
+        "alt": "Hair ornament, Tamil Nadu, India, 19th century, gold, rubies, emeralds, and clear stones, Honolulu Academy of Arts",
+        "credit": "Hiart · CC0 · https://commons.wikimedia.org/wiki/File:Hair_ornament,_Tamil_Nadu,_India,_19th_century,_gold,_rubies,_emeralds,_and_clear_stones,_Honolulu_Academy_of_Arts.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-03.webp",
+        "alt": "Bracelet, North India, Mughal period, 18th-19th century, gold, diamonds, rubies, emeralds, enamel - Royal Ontario Museum",
+        "credit": "Daderot · CC0 · https://commons.wikimedia.org/wiki/File:Bracelet,_North_India,_Mughal_period,_18th-19th_century,_gold,_diamonds,_rubies,_emeralds,_enamel_-_Royal_Ontario_Museum_-_DSC04557.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-04.webp",
+        "alt": "Hansli (necklace), India, possibly Bikaner, Rajasthan, Mughal period, 18th century, gold, diamonds, pearls, enamel - Roy",
+        "credit": "Daderot · CC0 · https://commons.wikimedia.org/wiki/File:Hansli_(necklace),_India,_possibly_Bikaner,_Rajasthan,_Mughal_period,_18th_century,_gold,_diamonds,_pearls,_enamel_-_Royal_Ontario_Museum_-_DSC04553.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-05.webp",
+        "alt": "Hathphul (bracelet), India, Rajasthan, probably Jaipur, Mughal period, 18th century, gold, white sapphires, rubies, enam",
+        "credit": "Daderot · CC0 · https://commons.wikimedia.org/wiki/File:Hathphul_(bracelet),_India,_Rajasthan,_probably_Jaipur,_Mughal_period,_18th_century,_gold,_white_sapphires,_rubies,_enamel_-_Royal_Ontario_Museum_-_DSC04563.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-06.webp",
+        "alt": "Kara (bracelet), India or Pakistan, Jaipur or Lahore, Mughal period, 18th century, gold, diamonds, enamel - Royal Ontari",
+        "credit": "Daderot · CC0 · https://commons.wikimedia.org/wiki/File:Kara_(bracelet),_India_or_Pakistan,_Jaipur_or_Lahore,_Mughal_period,_18th_century,_gold,_diamonds,_enamel_-_Royal_Ontario_Museum_-_DSC04565.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-07.webp",
+        "alt": "Sarpech (turban ornament), India, possibly Rajasthan, Mughal period, 18th century, gold, diamonds, rubies, emeralds, ena",
+        "credit": "Daderot · CC0 · https://commons.wikimedia.org/wiki/File:Sarpech_(turban_ornament),_India,_possibly_Rajasthan,_Mughal_period,_18th_century,_gold,_diamonds,_rubies,_emeralds,_enamel_-_Royal_Ontario_Museum_-_DSC04551.JPG"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-08.webp",
+        "alt": "British Museum The Islamic world Necklace Kundan India 21022019 7703",
+        "credit": "Vassil · CC0 · https://commons.wikimedia.org/wiki/File:British_Museum_The_Islamic_world_Necklace_Kundan_India_21022019_7703.jpg"
+      },
+      {
+        "src": "/images/categories/kundan/kundan-09.webp",
+        "alt": "Kashmiri waash kundan halka bandh (choker)",
+        "credit": "Khajawalsons · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Kashmiri_waash_kundan_halka_bandh_(choker).png"
+      }
+    ]
+  },
+  {
+    "slug": "mangalsutra",
+    "name": "Mangalsutra",
+    "blurb": "Mangalsutras styled for catalogue and for campaign.",
+    "images": [
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-01.webp",
+        "alt": "Mangalsutra (Thaali)",
+        "credit": "Anton Croos · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Mangalsutra_(Thaali).JPG"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-02.webp",
+        "alt": "WLA vanda marriage necklace",
+        "credit": "Wikipedia Loves Art participant \"va_va_val\" · CC BY-SA 2.5 · https://commons.wikimedia.org/wiki/File:WLA_vanda_marriage_necklace.jpg"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-03.webp",
+        "alt": "WLA vanda marriage necklace 2",
+        "credit": "Wikipedia Loves Art participant \"va_va_val\" · CC BY-SA 2.5 · https://commons.wikimedia.org/wiki/File:WLA_vanda_marriage_necklace_2.jpg"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-04.webp",
+        "alt": "Kali tiru (marriage necklace), Tamil Nadu, India, 19th-early 20th century, gold and turmeric covered cord, Honolulu Acad",
+        "credit": "Hiart · CC0 · https://commons.wikimedia.org/wiki/File:Kali_tiru_(marriage_necklace),_Tamil_Nadu,_India,_19th-early_20th_century,_gold_and_turmeric_covered_cord,_Honolulu_Academy_of_Arts.JPG"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-05.webp",
+        "alt": "താലി",
+        "credit": "Gramam at Malayalam Wikipedia. · Public domain · https://commons.wikimedia.org/wiki/File:%E0%B4%A4%E0%B4%BE%E0%B4%B2%E0%B4%BF.JPG"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-06.webp",
+        "alt": "Jaffna-thali",
+        "credit": "Pragash umachandraa · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Jaffna-thali.jpg"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-07.webp",
+        "alt": "Thali",
+        "credit": "Manivannansrm · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Thali.jpg"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-08.webp",
+        "alt": "Thaali for thamilar saiva- vaishnava",
+        "credit": "Parvathisri · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Thaali_for_thamilar_saiva-_vaishnava.jpg"
+      },
+      {
+        "src": "/images/categories/mangalsutra/mangalsutra-09.webp",
+        "alt": "A pottu thaali",
+        "credit": "Parvathisri · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:A_pottu_thaali.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "anklets",
+    "name": "Anklets & Toe Rings",
+    "blurb": "Payal and jhumkas for the feet, on model and on white.",
+    "images": [
+      {
+        "src": "/images/categories/anklets/anklets-01.webp",
+        "alt": "Silver Anklets",
+        "credit": "Niki Shyfeet · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Silver_Anklets.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-02.webp",
+        "alt": "Anklet",
+        "credit": "Wikimedia Commons contributor · CC0 · https://commons.wikimedia.org/wiki/File:Anklet_MET_LC-91_1_1124_view2.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-03.webp",
+        "alt": "Silver Anklet-2-xavier cottage-yercaud-salem-India",
+        "credit": "Yercaud-elango · CC BY 4.0 · https://commons.wikimedia.org/wiki/File:Silver_Anklet-2-xavier_cottage-yercaud-salem-India.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-04.webp",
+        "alt": "Silver Anklet-3-xavier cottage-yercaud-salem-India",
+        "credit": "Yercaud-elango · CC BY 4.0 · https://commons.wikimedia.org/wiki/File:Silver_Anklet-3-xavier_cottage-yercaud-salem-India.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-05.webp",
+        "alt": "Silver Anklet-4-xavier cottage-yercaud-salem-India",
+        "credit": "Yercaud-elango · CC BY 4.0 · https://commons.wikimedia.org/wiki/File:Silver_Anklet-4-xavier_cottage-yercaud-salem-India.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-06.webp",
+        "alt": "Silver Anklet-1-xavier cottage-yercaud-salem-India",
+        "credit": "Yercaud-elango · CC BY 4.0 · https://commons.wikimedia.org/wiki/File:Silver_Anklet-1-xavier_cottage-yercaud-salem-India.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-07.webp",
+        "alt": "Traditional Indian silver anklets 01",
+        "credit": "Shoot stufz · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Traditional_Indian_silver_anklets_01.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-08.webp",
+        "alt": "Traditional Indian silver anklets 02",
+        "credit": "Shoot stufz · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Traditional_Indian_silver_anklets_02.jpg"
+      },
+      {
+        "src": "/images/categories/anklets/anklets-09.webp",
+        "alt": "Anklets, Kangra Culture",
+        "credit": "SpeakingArch · CC BY-SA 4.0 · https://commons.wikimedia.org/wiki/File:Anklets,_Kangra_Culture.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "nosepins",
+    "name": "Nose Pins & Studs",
+    "blurb": "Naths and nose pins that read clearly at thumbnail size.",
+    "images": [
+      {
+        "src": "/images/categories/nosepins/nosepins-01.webp",
+        "alt": "Nose piercings",
+        "credit": "ButterflySha (on flickr.com) · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Nose_piercings.jpg"
+      },
+      {
+        "src": "/images/categories/nosepins/nosepins-02.webp",
+        "alt": "Nose piercing gold stud",
+        "credit": "Challiyil Eswaramangalath Vipin from Chalakudy, India · CC BY-SA 2.0 · https://commons.wikimedia.org/wiki/File:Nose_piercing_gold_stud.jpg"
+      },
+      {
+        "src": "/images/categories/nosepins/nosepins-03.webp",
+        "alt": "Nose piercing 2",
+        "credit": "Marissa Mullen · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Nose_piercing_2.jpg"
+      },
+      {
+        "src": "/images/categories/nosepins/nosepins-04.webp",
+        "alt": "Nose double piercing Both women nostrils Desi Indian girl Tamilnadu Traditional village dress Jpg photo Tamil feature st",
+        "credit": "Etan Doronne @ www.myindiaexperience.com · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Nose_double_piercing_Both_women_nostrils_Desi_Indian_girl_Tamilnadu_Traditional_village_dress_Jpg_photo_Tamil_feature_story_Etan_Doronne_Myindiaexperience.jpg"
+      },
+      {
+        "src": "/images/categories/nosepins/nosepins-05.webp",
+        "alt": "Septum Nose piercing",
+        "credit": "brandonvanityflickr · CC BY 2.0 · https://commons.wikimedia.org/wiki/File:Septum_Nose_piercing.jpg"
+      },
+      {
+        "src": "/images/categories/nosepins/nosepins-06.webp",
+        "alt": "Small nose ring example",
+        "credit": "AbbyD11 · CC BY-SA 2.0 · https://commons.wikimedia.org/wiki/File:Small_nose_ring_example.jpg"
+      }
+    ]
+  }
+]

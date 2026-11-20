@@ -1,50 +1,18 @@
 "use client";
 
-import { cubicBezier, motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useRef } from "react";
 import { SectionLabel } from "@/components/ui/Reveal";
 
-const TEXT =
-  "Jewellery is the hardest thing to photograph. Metal mirrors everything, stones hide their colour, and a phone camera flattens all of it. So we built a studio that does only this, so what your customer sees on a screen is what they fall for in the store.";
-const ACCENT = new Set(["hardest", "only", "fall"]);
-
-// Each word lights up from ~30% to full as it crosses the trigger line, on the base curve.
-const EASE = cubicBezier(0.22, 1, 0.36, 1);
-
-function Word({ word, i, total, progress }: { word: string; i: number; total: number; progress: MotionValue<number> }) {
-  const start = i / total;
-  const opacity = useTransform(progress, [start, start + 2 / total], [0.3, 1], { ease: EASE });
-  const bare = word.replace(/[^a-z]/gi, "").toLowerCase();
-  return (
-    <motion.span style={{ opacity }} className={ACCENT.has(bare) ? "text-taupe italic" : undefined}>
-      {word}{" "}
-    </motion.span>
-  );
+const words = "Not just seen. Felt. Remembered. Desired.".split(" ");
+function Word({ word, index, progress, reduced }: { word: string; index: number; progress: MotionValue<number>; reduced: boolean | null }) {
+  const opacity = useTransform(progress, [index / words.length, (index + 1) / words.length], [0.22, 1]);
+  const y = useTransform(progress, [index / words.length, (index + 1) / words.length], [8, 0]);
+  return <motion.span style={{ opacity: reduced ? 1 : opacity, y: reduced ? 0 : y }} className={`inline-block ${index >= 3 ? "italic" : ""}`}>{word}&nbsp;</motion.span>;
 }
-
 export default function Statement() {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
-  const words = TEXT.split(" ");
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches), []);
-  return (
-    <section data-header="light" className="section">
-      <div className="container-x flex flex-col items-center text-center">
-        <SectionLabel no="01">The studio</SectionLabel>
-        <p ref={ref} className="display display-lg mt-10 max-w-5xl leading-[1.08]">
-          {reduced
-            ? words.map((w, i) => {
-                const bare = w.replace(/[^a-z]/gi, "").toLowerCase();
-                return (
-                  <span key={i} className={ACCENT.has(bare) ? "text-taupe italic" : undefined}>
-                    {w}{" "}
-                  </span>
-                );
-              })
-            : words.map((w, i) => <Word key={i} word={w} i={i} total={words.length} progress={scrollYProgress} />)}
-        </p>
-      </div>
-    </section>
-  );
+  const ref = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 70%"] });
+  return <section ref={ref} className="section" data-header="light"><div className="container-x editorial-grid chapter-rule"><div className="col-span-4 md:col-span-3"><SectionLabel no="01">Our point of view</SectionLabel></div><div className="col-span-4 md:col-span-9"><h2 className="display display-xl max-w-[15ch]">{words.map((word, index) => <Word key={index} word={word} index={index} progress={scrollYProgress} reduced={reduced} />)}</h2><div className="mt-10 grid gap-6 md:grid-cols-2"><p className="max-w-md text-lg text-taupe">The weight of gold. The way a diamond catches the light. The feeling of finding something that is unmistakably yours.</p><p className="max-w-md text-base text-taupe">We translate those details into a visual world for your brand — with considered photography, storytelling and a consistent presence across every touchpoint.</p></div></div></div></section>;
 }

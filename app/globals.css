@@ -12,6 +12,9 @@
   --color-onyx: #2d2926;           /* PANTONE Black C: dark sections */
   --color-champagne: #ceb888;      /* PANTONE 7502 C: accent, CTAs */
   --color-champagne-deep: #a89968; /* PANTONE 7503 C: decorative accent, text on dark only */
+  --color-champagne-tint: #f8e0ad; /* HCT T90 of champagne: soft champagne tint on dark surfaces (11.2:1 on onyx) */
+  --color-gold-text: #6d5c34;      /* HCT T40 of champagne: accessible champagne for small text on light (5.7:1 on ivory) */
+  --color-gold-line: #54451f;      /* HCT T30 of champagne: warm hairlines and UI indicators on light (8.2:1 on ivory) */
   --color-taupe: #6e6259;          /* PANTONE Warm Gray 11 C: muted text and labels on light */
   --color-greige: #cbc4bc;         /* PANTONE Warm Gray 2 C: muted text on dark */
   --color-line-dark: rgb(206 184 136 / 0.2);
@@ -31,6 +34,18 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+}
+
+ :root {
+  --page-gutter: clamp(24px, 4.5vw, 80px);
+  --grid-gap: clamp(16px, 2vw, 32px);
+  --section-space: clamp(64px, 7.5vw, 112px);
+  --type-hero: clamp(2.75rem, 7vw, 6.75rem);
+  --type-xl: clamp(2.5rem, 5.25vw, 5.25rem);
+  --type-lg: clamp(2.25rem, 3.75vw, 4rem);
+  --type-md: clamp(1.75rem, 2.5vw, 2.75rem);
+  --radius-photo: 2px;
+  --radius-control: 9999px;
 }
 
 @layer base {
@@ -69,18 +84,24 @@
   }
   .container-x {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1680px;
     margin-inline: auto;
-    padding-inline: clamp(16px, 4vw, 56px);
+    padding-inline: var(--page-gutter);
   }
-  /* Long, calm vertical silences between sections (Oura), on one flat ivory canvas. */
-  .section { padding-block: clamp(96px, 12vw, 176px); }
-
-  /* Display sizes (Instrument Serif). Fluid, per CLAUDE.md; everything else uses the Tailwind scale. */
-  .display-hero { font-size: clamp(3.25rem, 5.6vw, 6rem); }
-  .display-xl { font-size: clamp(3rem, 6.4vw, 6.5rem); }
-  .display-lg { font-size: clamp(2.5rem, 4.6vw, 4.75rem); }
-  .display-md { font-size: clamp(2rem, 3.2vw, 3.25rem); line-height: 1; }
+  .section { padding-block: var(--section-space); }
+  .display-hero { font-size: var(--type-hero); letter-spacing: -0.045em; }
+  .display-xl { font-size: var(--type-xl); letter-spacing: -0.035em; }
+  .display-lg { font-size: var(--type-lg); }
+  .display-md { font-size: var(--type-md); line-height: 1; }
+  .editorial-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
+  .chapter-rule { border-top: 1px solid var(--color-line-light); padding-top: 24px; }
+  .editorial-link { display: inline-flex; align-items: center; gap: 16px; min-height: 48px; border-bottom: 1px solid var(--color-ink); font-size: 0.875rem; font-weight: 600; transition: gap 200ms var(--ease-luxe); }
+  .editorial-link:hover { gap: 24px; }
+  .editorial-link:active { opacity: 0.7; }
+  .photo-frame { position: relative; overflow: hidden; background: var(--color-cream); border-radius: var(--radius-photo); }
+  .folio-number { font-family: var(--font-display); font-size: var(--type-xl); line-height: 0.85; color: var(--color-taupe); }
+  .subpage-heading { padding-block: var(--section-space); border-bottom: 1px solid var(--color-line-light); }
+  @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
 
   /* Buttons: one pill grammar (Apple / Oura). Ink is the single action colour. */
   .btn {

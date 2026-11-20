@@ -20,6 +20,9 @@ These rules keep the site looking deliberate and premium rather than templated. 
 | `champagne-deep` | Deep champagne | 7503 C | #A89968 | Decorative detail; text on dark only |
 | `taupe` | Taupe | Warm Gray 11 C | #6E6259 | Secondary text and labels on light |
 | `greige` | Greige | Warm Gray 2 C | #CBC4BC | Secondary text on dark |
+| `gold-text` | Accessible gold | HCT T40 of 7502 C | #6D5C34 | Champagne-hued small text, labels and focus rings on light; 5.7:1 on ivory |
+| `gold-line` | Gold hairline | HCT T30 of 7502 C | #54451F | Warm hairlines and progress indicators on light; 8.2:1 on ivory |
+| `champagne-tint` | Champagne tint | HCT T90 of 7502 C | #F8E0AD | Soft champagne tint for text and detail on dark; 11.2:1 on onyx |
 
 **Proportion (60 · 30 · 10):** 60% ivory and cream, 30% ink and onyx, 10% champagne. The whole landing page sits on ivory with a faint paper grain, like the hero. Ink carries the type and primary buttons, and thin hairlines (`line-light`) separate the sections instead of colour blocks. Onyx is kept for dark surfaces such as the work viewer.
 
@@ -34,9 +37,12 @@ These rules keep the site looking deliberate and premium rather than templated. 
 | greige on onyx | 8.3 : 1 | AAA |
 | deep champagne on onyx | 5.1 : 1 | AA |
 | onyx on champagne (buttons) | 7.4 : 1 | AAA |
+| accessible gold on ivory | 5.7 : 1 | AA |
+| gold hairline on ivory | 8.2 : 1 | AAA |
+| champagne tint on onyx | 11.2 : 1 | AAA |
 
 **Rules:**
-- Never put `champagne` or `champagne-deep` text on a light background (2.5 : 1). Use `taupe` or `ink` instead.
+- Never put `champagne` or `champagne-deep` text on a light background (2.5 : 1). Use `taupe`, `ink`, or the derived `gold-text` when the champagne hue must survive.
 - Champagne is for things that matter: CTAs, labels and one highlighted word. If it's everywhere, it stops meaning anything.
 - No background gradients and no background grids. The page is flat ivory with a faint paper grain. The only gradient is the metal of the pendant frame.
 - Form errors use a deep red (`#9E2F3B`, 6.3 : 1 on ivory). This is a functional colour, not part of the brand palette.
@@ -58,28 +64,30 @@ These rules keep the site looking deliberate and premium rather than templated. 
 - Touch targets are at least 44 × 44px, and there's no horizontal scroll at 390px.
 
 ## 4. Motion
-- **Easing:** `cubic-bezier(0.22, 1, 0.36, 1)` (`--ease-luxe`, also Tailwind's default transition curve). Reveals rise 32px over 0.7s; hover colour changes take 300ms, never under 200ms.
-- Animate **transform and opacity only**.
-- Motion should mean something: headlines rise from behind a mask, the statement fills in as you read, and the process line draws as you progress.
-- With `prefers-reduced-motion`, the hero ring stays still, Lenis is off, and Motion skips transform animations.
+- **Easing:** `cubic-bezier(0.22, 1, 0.36, 1)` (`--ease-luxe` and `EASE_LUXE`). Shared reveals rise 24px over 400ms; stagger is capped at 200ms.
+- Scroll imagery translates within oversized crop bounds; masked headlines and the statement create the reading rhythm. No timed decorative loop is mounted on the landing page.
+- Shared reveals, image parallax and atelier transitions explicitly respect reduced motion; Lenis is disabled by the shared provider.
 
-## 5. Hero
-- The hero is a quiet cream "atelier" with a faint paper grain, in the spirit of the "Lumière" concept on getlayers.ai. It is an original implementation in this site's palette, fonts and copy; the paid template itself was not used or copied.
-- **Layout (desktop):** a modest headline vertically centred on the left; the real pendant photo hanging on a fine chain from the top of the screen, inside a slowly turning ring of eight photos; small tabs on the right edge; the pitch and the one CTA at the foot on the left. On phones: headline, pitch and CTA, then the ring and tabs, so the CTA is in the first screen.
-- **Tiles** are soft rounded squares (26% radius) on a greige tint, with no shadow. Each frame faces the centre (square at the top, bottom and sides, diamond on the diagonals) while the photo inside stays upright. The ring takes about 90 seconds per turn, scrolling adds a quarter turn, and hover or focus pauses it.
-- **Side tabs** switch what turns around the pendant: *Work* (the eight portfolio items, each opens the work viewer) or *Social* (eight feed photos, decorative). The photos crossfade when the set changes.
-- There is no 3D on the site. 3D jewellery and the 3D camera were removed at the owner's request, and the work is shown as real photography.
+## 5. Composition system
+- All-ivory editorial direction, with the existing Pantone palette and Instrument Serif / Manrope pairing. No dark theme, 3D or background grid.
+- `--page-gutter`, `--grid-gap`, `--section-space`, `--type-hero`, `--type-xl`, `--type-lg`, `--type-md`, `--radius-photo`, and `--radius-control` live in `app/globals.css`.
+- Four mobile columns become twelve at 768px; max canvas width is 1680px. Hairlines organize chapters without visible background gridlines.
+- `EditorialImage` takes src, alt, className (aspect ratio), sizes and optional priority. Two-pixel photo frames replace rounded portfolio cards.
+- `Reveal` and `MaskLines` remain the common scroll-entry primitives. Atelier tabs support arrows, Home and End.
 
 ## 6. Sections
-- **Hero:** label, headline, one sentence, one pill CTA ("Start a project") and a quiet "See the work" link; the pendant ring sits to the right on desktop.
-- **The studio:** centred tagline that fills in word by word as you scroll.
-- **The atelier:** a pinned stage (about three screens of scroll). One rounded square frame makes a single full turn: square while a stage is shown, diamond while its photo changes, with the photo always upright. Stages (Macro, On model, Campaign, Feed) are listed on the right like the hero tabs and can be clicked; a hairline fills with progress. The stages, their lines and photos live in `atelier` in `lib/site.ts`. This replaces the 3D "spinning rings" idea with photography.
-- **Services:** pill tabs, then one chapter per service: sticky copy on the left, its work on the right. The photo arrangement follows the service (`layout` in `lib/site.ts`): gallery, 9:16 reels, a 3 × 3 feed, or portrait cards.
-  - **Scroll motion:** the pill tabs float at the top of the section and mark the chapter in view. Each photo is unveiled upward (a sheet of ivory lifts away) and settles from a 1.15 zoom, then drifts about 5% inside its frame. In two column layouts the second column moves at its own pace, the middle reel moves against the outer two, and the feed arrives as a diagonal wave. Titles rise from a mask, the text follows in a short stagger, and a hairline under each chapter label fills as you read. With reduced motion, photos and text only fade in and nothing drifts.
-- **In numbers:** four round badges.
-- **Process:** four rounded cards.
-- **Clients:** one centred quote, with round arrow buttons and dots.
-- **FAQ** and **Contact:** two columns; the form sits in a rounded card.
+- **Hero:** oversized two-line masthead, asymmetric pendant photograph, supporting campaign crop, project link and work anchor. The earlier rotating ring remains unmounted.
+- **Point of view:** offset serif statement with scroll-linked opacity and two supporting copy columns.
+- **Visual edit:** filterable asymmetric photography grid; concept work and stock photography remain labelled.
+- **Atelier:** portrait image and keyboard-accessible stages, rather than a long pinned scroll trap.
+- **Services:** alternating image/copy chapters using each service's existing shot and points.
+- **In numbers:** open typographic columns above rules; sample status remains visible.
+- **Process:** vertical numbered timeline beside sticky introductory copy.
+- **Clients:** quote carousel with controls and sample-content disclosure.
+- **FAQ:** two-column questions and disclosures. **Contact:** oversized masthead above contact details and an open ruled form; validation and WhatsApp fallback retained.
+- **Footer:** oversized high-contrast wordmark.
+- **Legal pages:** oversized title, sticky contents navigation and numbered reading column. Legal templates remain marked.
+- **Brand page:** oversized editorial introduction and type specimen, followed by the existing palette and contrast reference.
 
 ## 7. References
 Layout, spacing, photo presentation, buttons and motion draw on two analyses from [awesome-design-md](https://github.com/VoltAgent/awesome-design-md), saved in `docs/design-references/`:

@@ -2,6 +2,7 @@ import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 import Statement from "@/components/sections/Statement";
 import Atelier from "@/components/sections/Atelier";
+import SelectedWork from "@/components/sections/SelectedWork";
 import ServiceJourney from "@/components/sections/ServiceJourney";
 import Results from "@/components/sections/Results";
 import Process from "@/components/sections/Process";
@@ -17,6 +18,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Statement />
+        <SelectedWork />
         <Atelier />
         <ServiceJourney />
         <Results />

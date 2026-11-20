@@ -4,10 +4,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
+import { categories } from "@/lib/categories";
 import { EASE_LUXE } from "@/components/ui/Reveal";
 
-const NAV = [
-  { id: "services", label: "Services" },
+const NAV: { id: string; label: string; href?: string }[] = [
+  { id: "work", label: "Work", href: "/work" },
+  { id: "categories", label: "Categories", href: "/categories" },
+  { id: "services", label: "Services", href: "/services" },
   { id: "process", label: "Process" },
   { id: "faq", label: "FAQ" },
   { id: "contact", label: "Contact" },
@@ -21,6 +24,7 @@ export default function Header() {
   const [dark, setDark] = useState(true);
   const [current, setCurrent] = useState<string | null>(null);
   const [menu, setMenu] = useState(false);
+  const [catOpen, setCatOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const lenis = useLenis();
 
@@ -69,10 +73,11 @@ export default function Header() {
         setMenu(false);
         toggle.current?.focus();
       }
+      if (e.key === "Escape" && catOpen) setCatOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [menu, lenis]);
+  }, [menu, lenis, catOpen]);
 
   // Every landing section is light now; the dark styles remain for any future dark section.
   const onDark = dark && !menu;
@@ -93,17 +98,77 @@ export default function Header() {
           <ul className="flex items-center gap-1">
             {NAV.map((n) => {
               const active = current === n.id;
+              const link = (
+                <a
+                  href={n.href ?? `#${n.id}`}
+                  aria-current={active ? "true" : undefined}
+                  className={`relative flex min-h-10 items-center rounded-full px-3 text-sm font-medium transition-colors ${
+                    active ? (onDark ? "bg-ivory/10 text-champagne" : "bg-ink/5 text-taupe") : onDark ? "hover:bg-ivory/10" : "hover:bg-ink/5"
+                  }`}
+                >
+                  {n.label}
+                </a>
+              );
+              if (n.id !== "categories") {
+                return (
+                  <li key={n.id}>{link}</li>
+                );
+              }
               return (
-                <li key={n.id}>
-                  <a
-                    href={`#${n.id}`}
-                    aria-current={active ? "true" : undefined}
+                <li
+                  key={n.id}
+                  className="relative"
+                  onMouseEnter={() => setCatOpen(true)}
+                  onMouseLeave={() => setCatOpen(false)}
+                >
+                  <button
+                    type="button"
+                    aria-expanded={catOpen}
+                    aria-haspopup="true"
+                    onClick={() => setCatOpen((o) => !o)}
                     className={`relative flex min-h-10 items-center rounded-full px-3 text-sm font-medium transition-colors ${
                       active ? (onDark ? "bg-ivory/10 text-champagne" : "bg-ink/5 text-taupe") : onDark ? "hover:bg-ivory/10" : "hover:bg-ink/5"
                     }`}
                   >
                     {n.label}
-                  </a>
+                  </button>
+                  <div
+                    className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                      catOpen ? "visible translate-y-0 opacity-100" : "invisible pointer-events-none translate-y-1 opacity-0"
+                    }`}
+                  >
+                    <div
+                      className={`w-56 rounded-2xl border p-2 shadow-xl backdrop-blur-xl ${
+                        onDark ? "border-ivory/10 bg-onyx/90 text-ivory" : "border-ink/10 bg-ivory/95 text-ink"
+                      }`}
+                    >
+                      <p className={`label px-3 pt-2 pb-1 ${onDark ? "text-champagne" : "text-taupe"}`}>Choose a category</p>
+                      <ul>
+                        <li>
+                          <a
+                            href="/categories"
+                            className={`block rounded-xl px-3 py-2 text-sm font-semibold transition-colors ${
+                              onDark ? "hover:bg-ivory/10 hover:text-champagne" : "hover:bg-ink/5"
+                            }`}
+                          >
+                            All categories
+                          </a>
+                        </li>
+                        {categories.map((c) => (
+                          <li key={c.slug}>
+                            <a
+                              href={`/categories?c=${c.slug}`}
+                              className={`block rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                                onDark ? "hover:bg-ivory/10 hover:text-champagne" : "hover:bg-ink/5"
+                              }`}
+                            >
+                              {c.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </li>
               );
             })}
@@ -112,7 +177,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <a
-            href="#contact"
+            href="/start-a-project"
             className={`hidden min-h-10 items-center rounded-full px-4 text-sm font-semibold transition-[background-color,color,transform] active:scale-[0.98] md:inline-flex ${
               onDark ? "bg-champagne text-onyx hover:bg-ivory" : "bg-ink text-ivory hover:bg-onyx"
             }`}
@@ -157,7 +222,7 @@ export default function Header() {
                   transition={{ delay: i * 0.06, duration: 0.16, ease: EASE_LUXE }}
                 >
                   <a
-                    href={`#${n.id}`}
+                    href={n.href ?? `#${n.id}`}
                     onClick={() => setMenu(false)}
                     aria-current={current === n.id ? "true" : undefined}
                     className={`display flex items-baseline gap-4 border-b border-line-light py-3 text-5xl ${current === n.id ? "text-taupe" : ""}`}
@@ -165,12 +230,27 @@ export default function Header() {
                     <span className="label text-taupe">0{i + 1}</span>
                     {n.label}
                   </a>
+                  {n.id === "categories" && (
+                    <ul className="grid grid-cols-2 gap-1 py-3">
+                      {categories.map((c) => (
+                        <li key={c.slug}>
+                          <a
+                            href={`/categories?c=${c.slug}`}
+                            onClick={() => setMenu(false)}
+                            className="block rounded-full border border-line-light px-3 py-2 text-sm font-medium transition-colors hover:border-champagne hover:bg-champagne/10"
+                          >
+                            {c.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </motion.li>
               ))}
             </ul>
             <div className="space-y-6">
               <a
-                href="#contact"
+                href="/start-a-project"
                 onClick={() => setMenu(false)}
                 className="flex min-h-12 items-center justify-center rounded-full bg-ink text-base font-semibold text-ivory active:scale-[0.98]"
               >

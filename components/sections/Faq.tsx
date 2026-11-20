@@ -35,7 +35,7 @@ export default function Faq() {
       <div className="container-x grid gap-12 md:grid-cols-12">
         <div className="md:col-span-4">
           <div className="md:sticky md:top-32">
-          <SectionLabel no="06">FAQ</SectionLabel>
+          <SectionLabel no="08">The finer details</SectionLabel>
           <h2 className="display display-lg mt-6">
             <MaskLines lines={["Questions brands", "ask us first."]} />
           </h2>

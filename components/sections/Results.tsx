@@ -17,7 +17,7 @@ function Count({ to, decimals = 0, suffix }: { to: number; decimals?: number; su
       el.textContent = to.toFixed(decimals);
       return;
     }
-    const c = animate(0, to, { duration: 2, ease: [0.22, 1, 0.36, 1], onUpdate: (v) => (el.textContent = v.toFixed(decimals)) });
+    const c = animate(0, to, { duration: 0.4, ease: [0.22, 1, 0.36, 1], onUpdate: (v) => (el.textContent = v.toFixed(decimals)) });
     return () => c.stop();
   }, [inView, to, decimals]);
   return (
@@ -32,17 +32,17 @@ export default function Results() {
   return (
     <section data-header="light" className="section border-t border-line-light">
       <div className="container-x">
-        <div className="flex flex-col items-center text-center">
-          <SectionLabel no="03">In numbers</SectionLabel>
-          <h2 className="display display-lg mt-6 max-w-3xl">
+        <div className="editorial-grid items-end">
+          <div className="col-span-4 md:col-span-4"><SectionLabel no="05">Beyond the image</SectionLabel></div>
+          <h2 className="display display-lg col-span-4 max-w-3xl md:col-span-8">
             What the work does <em className="text-taupe">after</em> the shoot.
           </h2>
         </div>
-        <dl className="mx-auto mt-16 grid max-w-6xl grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4">
+        <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.06} className="flex aspect-square flex-col-reverse items-center justify-center rounded-full border border-line-light p-4 text-center">
-              <dt className="mt-2 max-w-[12ch] text-sm text-taupe sm:mt-4">{s.label}</dt>
-              <dd className="display text-5xl leading-none sm:text-7xl">
+            <Reveal key={s.label} delay={i * 0.06} className="flex flex-col-reverse border-t border-line-light pt-8">
+              <dt className="mt-4 text-sm text-taupe">{s.label}</dt>
+              <dd className="display display-xl leading-none">
                 <Count to={s.value} decimals={s.decimals} suffix={s.suffix} />
               </dd>
             </Reveal>
