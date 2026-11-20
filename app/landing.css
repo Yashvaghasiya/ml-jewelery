@@ -16,7 +16,7 @@
   padding-inline: clamp(1.25rem, 6vw, 7rem);
 }
 
-.edition-title, .archive-print h3, .print-viewer h3, .service-entry h3,
+.edition-title, .print-viewer h3, .service-entry h3,
 .story-caption h3, .studio-ledger dd, .quote-paper blockquote, .brief-paper h3,
 .footer-signature p {
   font-family: var(--font-display);
@@ -38,7 +38,7 @@
   line-height: 1.65;
 }
 
-.edition-label, .print-meta, .service-folio {
+.edition-label, .service-folio {
   font-size: .7rem;
   line-height: 1.5;
   font-weight: 650;
@@ -65,19 +65,6 @@
 .studio-home section[id]:not(#hero) { scroll-margin-top: 3.6rem; }
 
 /* A moving loupe inspects the same point on the original and enlarged exposure. */
-.perspective {
-  padding-block: var(--page-space);
-  background: var(--paper);
-  color: var(--wine);
-}
-.perspective-spread { display: grid; gap: 2.5rem; align-items: center; }
-.perspective-copy .edition-body { margin-top: 1.6rem; color: var(--pencil); }
-.perspective-copy .edition-link { margin-top: 1.25rem; }
-.loupe-print {
-  padding: clamp(.65rem, 1.4vw, 1.5rem) clamp(.65rem, 1.4vw, 1.5rem) 0;
-  border: 1px solid #cbbdaf;
-  background: #eee7db;
-}
 .loupe-plate {
   --x: var(--pointer-x, var(--scan-x, 49%));
   --y: var(--pointer-y, var(--scan-y, 53%));
@@ -88,7 +75,6 @@
 }
 .loupe-plate[data-magnified="true"] { cursor: crosshair; }
 .loupe-detail { position: absolute; inset: 0; clip-path: circle(var(--radius) at var(--x) var(--y)); }
-.loupe-detail img { transform: scale(1.85); transform-origin: var(--x) var(--y); }
 .loupe-rim {
   position: absolute;
   top: var(--y);
@@ -110,12 +96,10 @@
   min-height: 3.4rem;
   color: var(--pencil);
 }
-.loupe-print figcaption > span { font: italic 1.18rem var(--font-display); }
 .loupe-print button { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding-inline: .25rem; font-size: .8rem; }
 .loupe-print button svg { width: 1.1rem; height: 1.1rem; }
 
-/* Alternating large prints and small companion prints share one caption grid. */
-.print-archive { padding-block: var(--page-space); background: #efe7db; color: var(--wine); }
+/* Shared editorial headings and archive controls. */
 .archive-masthead, .storyboard-head {
   display: flex;
   flex-wrap: wrap;
@@ -137,18 +121,7 @@
 .archive-filters button[aria-pressed="true"] { color: var(--wine); font-weight: 700; }
 .archive-filters button[aria-pressed="true"]::after { content: ""; position: absolute; inset: auto 0 -1px; height: 2px; background: currentColor; }
 .archive-toolbar > p { font-size: .77rem; color: var(--pencil); }
-.print-wall { display: grid; gap: clamp(2.5rem, 5.2vw, 6rem); padding-block: clamp(2rem, 4.2vw, 4.8rem); }
-.archive-print { min-width: 0; }
-.print-window { position: relative; display: block; width: 100%; aspect-ratio: 1.33; overflow: hidden; background: var(--linen); cursor: zoom-in; }
-.archive-print:nth-child(4n + 2) .print-window { aspect-ratio: .9; }
-.archive-print:nth-child(4n + 3) .print-window { aspect-ratio: 1.08; }
-.print-window img { transition: transform .8s var(--ease-luxe); }
-.print-window:hover img, .print-window:focus-visible img { transform: scale(1.045); }
-.print-expand { position: absolute; right: .75rem; bottom: .75rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; background: var(--paper); border-radius: 50%; color: var(--wine); }
-.print-meta { display: flex; justify-content: space-between; gap: 1rem; margin: 1.05rem 0 .45rem; color: var(--pencil); font-size: .65rem; }
-.archive-print h3 { font-size: clamp(2.2rem, 3.8vw, 4.1rem); line-height: 1; }
-.archive-print figcaption > p, .archive-end > p { font-size: .77rem; color: var(--pencil); }
-.archive-print figcaption > p { margin-top: .6rem; }
+.archive-end > p { font-size: .77rem; color: var(--pencil); }
 .archive-end { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
 
 .print-viewer {
@@ -172,11 +145,11 @@
 .viewer-thumbs button[aria-pressed="true"] { opacity: 1; outline: 1px solid #f4d5b5; outline-offset: 2px; }
 .print-viewer :focus-visible, .service-edition :focus-visible, .studio-footer :focus-visible, .commission-intro :focus-visible { outline-color: #fff3da; }
 
-/* Preview and contact sheet are one print, with the four exposures selectable by keyboard. */
+/* The contact sheet exposes the print stack through scroll or keyboard selection. */
 .light-table { color: var(--wine); background: #e6d9c7; padding-block: var(--page-space); }
 .table-spread { display: grid; align-items: center; gap: 2.25rem; }
 .table-intro .edition-body { margin-top: 1.5rem; color: var(--pencil); }
-.table-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; max-width: 25rem; margin-top: 2.3rem; }
+.table-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; max-width: 25rem; margin-top: 2.3rem; }
 .table-tabs button { min-height: 44px; padding: .35rem; color: var(--pencil); border-bottom: 1px solid var(--rule); font-size: .76rem; }
 .table-thumb { display: block; position: relative; margin-bottom: .45rem; aspect-ratio: 1.45; overflow: hidden; }
 .table-thumb img { filter: saturate(.35); opacity: .72; transition: opacity .3s, filter .3s; }
@@ -321,14 +294,6 @@
 .footer-imprint { border-top: 1px solid #d1b9aa50; padding-top: .5rem; color: #ddcbbb; font-size: .76rem; }
 
 @media (min-width: 800px) {
-  .perspective-spread { grid-template-columns: 1.02fr 1fr; gap: clamp(3rem, 8.5vw, 9rem); }
-  .loupe-print { grid-column: 1; grid-row: 1; }
-  .perspective-copy { grid-column: 2; grid-row: 1; }
-  .print-wall { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; column-gap: clamp(1rem, 2.2vw, 2.2rem); }
-  .archive-print:nth-child(4n + 1) { grid-column: 1 / span 7; }
-  .archive-print:nth-child(4n + 2) { grid-column: 9 / span 4; margin-top: clamp(3.25rem, 7vw, 7rem); }
-  .archive-print:nth-child(4n + 3) { grid-column: 2 / span 4; margin-top: clamp(2.5rem, 5vw, 5rem); }
-  .archive-print:nth-child(4n) { grid-column: 7 / span 6; }
   .table-spread { grid-template-columns: .86fr 1.14fr; gap: clamp(2.5rem, 6vw, 7rem); }
   .services-heading { grid-template-columns: 1fr minmax(16rem, .4fr); gap: 3rem; }
   .services-heading .edition-title { max-width: 12ch; }
@@ -361,22 +326,16 @@
   .archive-toolbar > p { padding-block: .45rem; }
 }
 @media (min-width: 520px) and (max-width: 799px) {
-  .perspective-spread { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .perspective-copy .edition-title { font-size: 3.75rem; }
-  .print-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 1.4rem; }
-  .archive-print:nth-child(even) { margin-top: 2rem; }
   .storyboard-frames { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .storyboard-frames li { display: block; }
   .story-still { aspect-ratio: 1.65; margin-bottom: .8rem; }
 }
 @media (max-width: 519px) {
   .studio-home section[id]:not(#hero) { scroll-margin-top: 3rem; }
-  .perspective-copy .edition-title br, .faq-intro .edition-title br { display: none; }
+  .faq-intro .edition-title br { display: none; }
 
   .archive-masthead .edition-link, .storyboard-head .edition-link { margin-top: .25rem; }
   .archive-toolbar { position: relative; }
-  .archive-print:nth-child(4n + 2), .archive-print:nth-child(4n + 3) { width: 88%; justify-self: end; }
-  .archive-print:nth-child(4n + 3) { justify-self: start; }
   .archive-filters button { min-height: 44px; }
   .footer-imprint { gap: .1rem 1rem; }
 }
@@ -385,14 +344,6 @@
 
 }
 
-@keyframes print-uncover {
-  from { clip-path: inset(8% 3% 0); translate: 0 1.5rem; }
-  to { clip-path: inset(0); translate: 0 0; }
-}
-@keyframes storyboard-pan {
-  from { transform: scale(1.16) translateX(-2.5%); }
-  to { transform: scale(1.03) translateX(0); }
-}
 @keyframes signature-settle {
   from { translate: 0 .15em; }
   to { translate: 0 0; }
@@ -410,8 +361,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .quote-paper figure, .service-easel .service-print { animation: proof-change .45s var(--ease-luxe); }
   @supports (animation-timeline: view()) {
-    .print-window { animation: print-uncover linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
-    .story-still img { animation: storyboard-pan linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
     .footer-signature p { animation: signature-settle linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
   }
 }

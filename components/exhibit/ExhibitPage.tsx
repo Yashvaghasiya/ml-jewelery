@@ -330,7 +330,7 @@ function Closing() {
         <a className="gold-cta" href={wa} target="_blank" rel="noopener noreferrer">Commission a Piece →</a>
       </Reveal>
       <Reveal as="p" delay={220} className="vx-colophon">
-        Verdane Studio · {site.address.join(", ")} · Since {site.since}
+        Verdane Studio · {site.address.join(", ") || site.city} · Since {site.since}
         <br />
         <a href="/" style={{ color: "var(--vx-ink-dim)" }}>← The ivory edition</a>
       </Reveal>

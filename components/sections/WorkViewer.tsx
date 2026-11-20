@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useLenis } from "lenis/react";
 import { ArrowLeftIcon, ArrowRightIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useRef } from "react";
-import { works, workStill, type Work } from "@/lib/site";
-import { SampleTag } from "@/components/ui/Sample";
+import { site, works, workStill, type Work } from "@/lib/site";
 
 type Props = {
   items?: Work[];
@@ -78,10 +77,11 @@ export default function WorkViewer({ items = works, index, onIndex, onClose }: P
           </div>
           <div className="viewer-caption">
             <div aria-live="polite">
-              <p className="edition-label">{work.service} · {work.year}</p>
+              <p className="edition-label">{work.service}{!site.sampleContent && ` · ${work.year}`}</p>
               <h3>{work.title}</h3>
-              <p>{work.client}{work.credit && ` · Stock photograph by ${work.credit}`}</p>
-              <p className="viewer-result">{work.result} <SampleTag dark /></p>
+              {work.credit && <p>Reference photograph · {work.credit}</p>}
+              {!site.sampleContent && <p>{work.client}</p>}
+              {!site.sampleContent && <p className="viewer-result">{work.result}</p>}
             </div>
             {items.length > 1 && (
               <div className="viewer-nav">

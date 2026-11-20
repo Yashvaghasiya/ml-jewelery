@@ -11,7 +11,7 @@ export default function Contact() {
         <div className="commission-intro">
           <p className="edition-label">Project enquiries</p>
           <h2 className="edition-title" id="contact-title">Your next<br /><em>collection.</em></h2>
-          <p className="edition-body">Tell us about the pieces, the launch date and the images you have in mind.</p>
+          <p className="edition-body">Plan the shoot around your pieces, your launch date and the images you have in mind.</p>
           <a className="edition-link" href="/start-a-project">Open the full project brief <ArrowUpRightIcon aria-hidden /></a>
           <div className="studio-address">
             <div className="address-print">
@@ -19,9 +19,10 @@ export default function Contact() {
             </div>
             <address>
               <strong>{site.city} studio</strong>
-              <span>{site.address.join(", ")}</span>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-              <a href={waLink("Hi! I'd like to discuss a project.")} target="_blank" rel="noopener">{site.phone}</a>
+              {site.address.length > 0 && <span>{site.address.join(", ")}</span>}
+              {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+              {site.phone && <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a>}
+              {site.whatsapp && <a href={waLink("Hi! I'd like to discuss a project.")} target="_blank" rel="noopener">WhatsApp</a>}
             </address>
           </div>
         </div>

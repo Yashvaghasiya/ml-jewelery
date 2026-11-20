@@ -4,20 +4,21 @@ import Image from "next/image";
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useLenis } from "lenis/react";
-import { atelier } from "@/lib/site";
+import type { StudyFrame } from "@/lib/kundan-study";
 
 const scrollLayout = "(min-width: 900px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
 
-function ProofPrint({ index, active, scrollable, progress }: {
+function ProofPrint({ frame, total, index, active, scrollable, progress }: {
+  frame: StudyFrame;
+  total: number;
   index: number;
   active: number;
   scrollable: boolean;
   progress: MotionValue<number>;
 }) {
-  const frame = atelier[index];
   const tilt = index % 2 === 0 ? -2 : 2;
   // Hold each print for reading, then lift it off to expose the next print underneath.
-  const turn = useTransform(progress, value => Math.min(1, Math.max(0, (value * (atelier.length - 1) - index - 0.23) / 0.63)));
+  const turn = useTransform(progress, value => Math.min(1, Math.max(0, (value * (total - 1) - index - 0.23) / 0.63)));
   const rotate = useTransform(turn, [0, 1], [tilt, tilt + 13]);
   const x = useTransform(turn, [0, 1], ["0%", "104%"]);
   const y = useTransform(turn, [0, 1], ["0%", "-14%"]);
@@ -27,7 +28,7 @@ function ProofPrint({ index, active, scrollable, progress }: {
       className="proof-print"
       aria-hidden={index !== active}
       style={{
-        zIndex: atelier.length - index,
+        zIndex: total - index,
         rotate: scrollable ? rotate : tilt,
         x: scrollable ? x : 0,
         y: scrollable ? y : 0,
@@ -35,17 +36,17 @@ function ProofPrint({ index, active, scrollable, progress }: {
       }}
     >
       <div className="proof-negative">
-        <Image src={frame.image.src} alt={frame.image.alt} fill sizes="(min-width: 800px) 49vw, 88vw" className="object-cover" />
+        <Image src={frame.src} alt={frame.alt} fill sizes="(min-width: 800px) 49vw, 88vw" className="object-cover" style={{ objectPosition: frame.position }} />
       </div>
       <figcaption>
-        <span>{String(index + 1).padStart(2, "0")} / {String(atelier.length).padStart(2, "0")}</span>
-        <p>{frame.line}</p>
+        <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
+        <p>{frame.label}{frame.reference && <small>Reference · Pexels</small>}</p>
       </figcaption>
     </motion.figure>
   );
 }
 
-export default function Atelier() {
+export default function Atelier({ frames }: { frames: StudyFrame[] }) {
   const [active, setActive] = useState(0);
   const [scrollable, setScrollable] = useState(false);
   const section = useRef<HTMLElement>(null);
@@ -58,15 +59,15 @@ export default function Atelier() {
     const media = window.matchMedia(scrollLayout);
     const update = () => {
       setScrollable(media.matches);
-      if (media.matches) setActive(Math.round(scrollYProgress.get() * (atelier.length - 1)));
+      if (media.matches) setActive(Math.round(scrollYProgress.get() * (frames.length - 1)));
     };
     update();
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
-  }, [scrollYProgress]);
+  }, [scrollYProgress, frames.length]);
 
   useMotionValueEvent(scrollYProgress, "change", value => {
-    if (scrollable) setActive(Math.round(value * (atelier.length - 1)));
+    if (scrollable) setActive(Math.round(value * (frames.length - 1)));
   });
 
   function select(index: number) {
@@ -74,7 +75,7 @@ export default function Atelier() {
     if (!scrollable || !section.current || !stage.current) return;
     const range = section.current.offsetHeight - stage.current.offsetHeight;
     const top = section.current.getBoundingClientRect().top + window.scrollY;
-    const target = top + range * index / (atelier.length - 1);
+    const target = top + range * index / (frames.length - 1);
     if (lenis) lenis.scrollTo(target, { immediate: true });
     else window.scrollTo({ top: target, behavior: "instant" });
   }
@@ -82,10 +83,10 @@ export default function Atelier() {
   function navigate(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     let next = index;
     switch (event.key) {
-      case "ArrowRight": next = (index + 1) % atelier.length; break;
-      case "ArrowLeft": next = (index - 1 + atelier.length) % atelier.length; break;
+      case "ArrowRight": next = (index + 1) % frames.length; break;
+      case "ArrowLeft": next = (index - 1 + frames.length) % frames.length; break;
       case "Home": next = 0; break;
-      case "End": next = atelier.length - 1; break;
+      case "End": next = frames.length - 1; break;
       default: return;
     }
     event.preventDefault();
@@ -100,9 +101,9 @@ export default function Atelier() {
           <div className="table-intro">
             <p className="edition-label">Inside the atelier</p>
             <h2 className="edition-title" id="atelier-title">Through<br /><em>the lens.</em></h2>
-            <p className="edition-body">Four ways to frame a collection, from the facets of a single stone to a portrait for the campaign.</p>
+            <p className="edition-body">Turn through the Kundan edit, from the edge of a setting to the silhouette of the whole piece.</p>
             <div role="tablist" aria-label="Atelier stages" className="table-tabs">
-              {atelier.map((item, i) => (
+              {frames.map((item, i) => (
                 <button
                   key={item.label}
                   ref={el => { tabs.current[i] = el; }}
@@ -115,14 +116,14 @@ export default function Atelier() {
                   onClick={() => select(i)}
                   onKeyDown={event => navigate(event, i)}
                 >
-                  <span className="table-thumb"><Image src={item.image.src} alt="" fill sizes="92px" className="object-cover" /></span>
+                  <span className="table-thumb"><Image src={item.src} alt="" fill sizes="92px" className="object-cover" /></span>
                   {item.label}
                 </button>
               ))}
             </div>
           </div>
           <div id="stage-panel" className="proof-stack" role="tabpanel" aria-labelledby={`stage-tab-${active}`} tabIndex={0}>
-            {atelier.map((item, index) => <ProofPrint key={item.label} index={index} active={active} scrollable={scrollable} progress={scrollYProgress} />)}
+            {frames.map((item, index) => <ProofPrint key={item.label} frame={item} total={frames.length} index={index} active={active} scrollable={scrollable} progress={scrollYProgress} />)}
           </div>
         </div>
       </div>
