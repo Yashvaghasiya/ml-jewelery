@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { services, site, waLink } from "@/lib/site";
+import { briefChannel, services, site, waLink } from "@/lib/site";
 import { ArrowRightIcon, CaretDownIcon } from "@phosphor-icons/react/dist/ssr";
 
 const BUDGETS = ["Under ₹50k", "₹50k to ₹2L", "₹2L to ₹5L", "₹5L+"];
@@ -30,7 +30,7 @@ function Field({ id, label, error, ...rest }: { id: string; label: string; error
   );
 }
 
-/** The project brief form (WhatsApp hand-off). `?service=` deep links prefill the service. */
+/** The project brief form. `?service=` deep links prefill the service. */
 export default function ProjectForm() {
   return (
     <Suspense fallback={<div className="min-h-[560px] border-t border-ink" aria-hidden />}>
@@ -45,14 +45,17 @@ function BriefForm() {
   const presetService = services.some((s) => s.title === preset) ? (preset as string) : services[0].title;
   const [errors, setErrors] = useState<Errors>({});
   const [budget, setBudget] = useState(BUDGETS[1]);
-  const [sent, setSent] = useState(false);
+  const [prepared, setPrepared] = useState(false);
 
   function validate(form: HTMLFormElement) {
     const d = new FormData(form);
     const e: Errors = {};
     if (String(d.get("name") ?? "").trim().length < 2) e.name = "Please tell us your name.";
-    const digits = String(d.get("phone") ?? "").replace(/\D/g, "");
-    if (digits.length < 10 || digits.length > 13) e.phone = "Enter your 10 digit mobile number so we can call you back.";
+    const number = String(d.get("phone") ?? "").trim();
+    const digits = number.replace(/\D/g, "");
+    if ((number || briefChannel === "WhatsApp") && (digits.length < 7 || digits.length > 15)) {
+      e.phone = "Enter a phone number with 7 to 15 digits, including your country code.";
+    }
     return e;
   }
 
@@ -74,19 +77,31 @@ function BriefForm() {
           `New project enquiry for ${site.brand} Studio`,
           `Name: ${d.name}`,
           d.brand && `Brand: ${d.brand}`,
-          `Phone: ${d.phone}`,
+          d.phone && `Phone: ${d.phone}`,
           `Service: ${d.service}`,
           `Budget: ${budget}`,
           d.message && `Brief: ${d.message}`,
         ]
           .filter(Boolean)
           .join("\n");
-        // No backend needed: the brief lands in WhatsApp. Swap for a fetch() to your CRM if preferred.
-        window.open(waLink(brief), "_blank", "noopener");
-        setSent(true);
-        form.reset();
+        if (briefChannel === "WhatsApp") {
+          window.open(waLink(brief), "_blank", "noopener");
+        } else if (briefChannel === "email") {
+          window.location.href = `mailto:${site.email}?subject=${encodeURIComponent("Project enquiry for " + site.brand)}&body=${encodeURIComponent(brief)}`;
+        } else {
+          const url = URL.createObjectURL(new Blob([brief + "\n"], { type: "text/plain;charset=utf-8" }));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "verdane-project-brief.txt";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+        setPrepared(true);
       }}
       onInput={(ev) => {
+        setPrepared(false);
         if (Object.keys(errors).length) setErrors(validate(ev.currentTarget));
       }}
     >
@@ -94,7 +109,7 @@ function BriefForm() {
         <Field id="name" label="Your name" autoComplete="name" required error={errors.name} />
         <Field id="brand" label="Brand / store (optional)" autoComplete="organization" />
       </div>
-      <Field id="phone" label="Mobile / WhatsApp" type="tel" inputMode="tel" autoComplete="tel" required error={errors.phone} />
+      <Field id="phone" label={briefChannel === "WhatsApp" ? "Mobile / WhatsApp" : "Phone (optional)"} type="tel" inputMode="tel" autoComplete="tel" required={briefChannel === "WhatsApp"} error={errors.phone} />
 
       <div className="relative">
         <select id="service" name="service" key={presetService} defaultValue={presetService} className={`${inputCls} appearance-none pr-8`}>
@@ -135,11 +150,13 @@ function BriefForm() {
 
       <div className="flex flex-wrap items-center gap-6">
         <button type="submit" className="btn btn-primary">
-          Send brief on WhatsApp
+          {briefChannel === "download" ? "Download project brief" : `Open brief in ${briefChannel}`}
           <ArrowRightIcon weight="bold" className="h-4 w-4" aria-hidden />
         </button>
         <p role="status" className="text-sm text-taupe">
-          {sent ? "Thanks! Your brief is ready in WhatsApp, just hit send." : "We reply within one working day."}
+          {briefChannel === "download"
+            ? (prepared ? "Your text file is ready to save." : "Save a text copy on your device to share when ready.")
+            : (prepared ? `Send your prepared brief from ${briefChannel}.` : `Review your brief in ${briefChannel} before sending.`)}
         </p>
       </div>
     </form>

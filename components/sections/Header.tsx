@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { categories } from "@/lib/categories";
@@ -20,8 +21,10 @@ const NAV: { id: string; label: string; href?: string }[] = [
  * A compact pill that floats off the top edge (landing-page-design B7): translucent
  * over a blur, tinted for the section beneath it, with the current section marked.
  */
-export default function Header() {
-  const [dark, setDark] = useState(true);
+export default function Header({ innerPage = false }: { innerPage?: boolean }) {
+  const home = innerPage ? "/" : "";
+  const pathname = usePathname();
+  const [dark, setDark] = useState(!innerPage);
   const [current, setCurrent] = useState<string | null>(null);
   const [menu, setMenu] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
@@ -79,27 +82,28 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [menu, lenis, catOpen]);
 
+  const activeSection = innerPage ? pathname.split("/")[1] : current;
   const onDark = dark && !menu;
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center px-4">
       <div
-        className={`pointer-events-auto flex w-full items-center justify-between gap-6 rounded-full border py-2 pr-2 pl-6 backdrop-blur-xl transition-colors duration-500 md:w-auto ${
+        className={`pointer-events-auto flex w-full items-center justify-between gap-6 rounded-full border py-2 pr-2 pl-6 backdrop-blur-xl transition-colors duration-500 lg:w-auto ${
           onDark ? "border-ivory/10 bg-onyx/70 text-ivory" : "border-ink/10 bg-ivory/75 text-ink"
         }`}
       >
-        <a href="#hero" className="flex items-baseline gap-2" aria-label={`${site.brand} home`}>
+        <a href={innerPage ? "/" : "#hero"} className="flex items-baseline gap-2" aria-label={`${site.brand} home`}>
           <span className="display text-3xl leading-none">{site.brand}</span>
           <span className={`label hidden sm:inline ${onDark ? "text-champagne" : "text-taupe"}`}>Studio</span>
         </a>
 
-        <nav aria-label="Primary" className="hidden md:block">
+        <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {NAV.map((n) => {
-              const active = current === n.id;
+              const active = activeSection === n.id;
               const link = (
                 <a
-                  href={n.href ?? `#${n.id}`}
+                  href={n.href ?? `${home}#${n.id}`}
                   aria-current={active ? "true" : undefined}
                   className={`relative flex min-h-10 items-center rounded-full px-3 text-sm font-medium transition-colors ${
                     active ? (onDark ? "bg-ivory/10 text-champagne" : "bg-ink/5 text-taupe") : onDark ? "hover:bg-ivory/10" : "hover:bg-ink/5"
@@ -177,7 +181,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <a
             href="/start-a-project"
-            className={`hidden min-h-10 items-center rounded-full px-4 text-sm font-semibold transition-[background-color,color,transform] active:scale-[0.98] md:inline-flex ${
+            className={`hidden min-h-10 items-center rounded-full px-4 text-sm font-semibold transition-[background-color,color,transform] active:scale-[0.98] lg:inline-flex ${
               onDark ? "bg-champagne text-onyx hover:bg-ivory" : "bg-ink text-ivory hover:bg-onyx"
             }`}
           >
@@ -186,7 +190,7 @@ export default function Header() {
           <button
             ref={toggle}
             type="button"
-            className="grid h-11 w-11 place-items-center rounded-full md:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full lg:hidden"
             aria-expanded={menu}
             aria-controls="mobile-menu"
             aria-label={menu ? "Close menu" : "Open menu"}
@@ -205,8 +209,9 @@ export default function Header() {
         {menu && (
           <motion.nav
             id="mobile-menu"
+            data-lenis-prevent
             aria-label="Mobile"
-            className="pointer-events-auto fixed inset-0 -z-10 flex flex-col justify-between bg-ivory/95 px-4 pt-24 pb-10 text-ink backdrop-blur-2xl md:hidden"
+            className="pointer-events-auto fixed inset-0 -z-10 flex flex-col justify-between overflow-y-auto overscroll-contain bg-ivory/95 px-4 pt-24 pb-10 text-ink backdrop-blur-2xl lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -221,10 +226,10 @@ export default function Header() {
                   transition={{ delay: i * 0.06, duration: 0.16, ease: EASE_LUXE }}
                 >
                   <a
-                    href={n.href ?? `#${n.id}`}
+                    href={n.href ?? `${home}#${n.id}`}
                     onClick={() => setMenu(false)}
-                    aria-current={current === n.id ? "true" : undefined}
-                    className={`display flex items-baseline gap-4 border-b border-line-light py-3 text-5xl ${current === n.id ? "text-taupe" : ""}`}
+                    aria-current={activeSection === n.id ? "true" : undefined}
+                    className={`display flex items-baseline gap-4 border-b border-line-light py-3 text-5xl ${activeSection === n.id ? "text-taupe" : ""}`}
                   >
                     <span className="label text-taupe">0{i + 1}</span>
                     {n.label}
@@ -255,10 +260,10 @@ export default function Header() {
               >
                 Start a project
               </a>
-              <div className="space-y-2 text-sm text-taupe">
-                <p>{site.email}</p>
-                <p>{site.phone}</p>
-              </div>
+              {(site.email || site.phone) && <div className="space-y-2 text-sm text-taupe">
+                {site.email && <p>{site.email}</p>}
+                {site.phone && <p>{site.phone}</p>}
+              </div>}
             </div>
           </motion.nav>
         )}

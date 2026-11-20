@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRightIcon, PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import { services } from "@/lib/site";
 
 function ServicePrint({ service }: { service: (typeof services)[number] }) {
@@ -21,6 +21,17 @@ function ServicePrint({ service }: { service: (typeof services)[number] }) {
 export default function ServiceJourney() {
   const steps = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState(0);
+
+  useEffect(() => {
+    const readHash = () => {
+      const index = services.findIndex(service => window.location.hash === `#discipline-${service.no}`);
+      if (index >= 0) setExpanded(index);
+    };
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -56,12 +67,20 @@ export default function ServiceJourney() {
           <div ref={steps}>
             {services.map((service, i) => (
               <article key={service.no} id={`discipline-${service.no}`} data-discipline={i} className="service-entry">
-                <div className="service-mobile-art"><ServicePrint service={service} /></div>
                 <p className="service-folio"><span>{service.no}</span> / {String(services.length).padStart(2, "0")}</p>
-                <h3>{service.title}</h3>
-                <p className="edition-body">{service.line}</p>
-                <ul>{service.points.map(point => <li key={point}>{point}</li>)}</ul>
-                <a className="edition-link" href={`/start-a-project?service=${encodeURIComponent(service.title)}`}>Enquire about this service <ArrowUpRightIcon aria-hidden /></a>
+                <h3>
+                  <span className="service-name">{service.title}</span>
+                  <button type="button" className="service-trigger" aria-expanded={expanded === i} aria-controls={`service-panel-${service.no}`}
+                    onClick={() => setExpanded(expanded === i ? -1 : i)}>
+                    <small aria-hidden>{service.no}</small>{service.title}<PlusIcon aria-hidden />
+                  </button>
+                </h3>
+                <div id={`service-panel-${service.no}`} className="service-detail" data-mobile-open={expanded === i}>
+                  {expanded === i && <div className="service-mobile-art"><ServicePrint service={service} /></div>}
+                  <p className="edition-body">{service.line}</p>
+                  <ul>{service.points.map(point => <li key={point}>{point}</li>)}</ul>
+                  <a className="edition-link" href={`/start-a-project?service=${encodeURIComponent(service.title)}`}>Enquire about this service <ArrowUpRightIcon aria-hidden /></a>
+                </div>
               </article>
             ))}
           </div>

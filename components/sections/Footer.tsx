@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpIcon } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/lib/site";
 
-export default function Footer() {
+export default function Footer({ backTo = "#hero" }: { backTo?: string }) {
   const socials = Object.entries(site.social).filter(([, url]) => url);
   return (
     <footer className="studio-footer" data-header="dark">
@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
         <div className="footer-signature">
           <p aria-label={`${site.brand} Studio`}>{site.brand}</p>
-          <a href="#hero" aria-label="Back to top"><ArrowUpIcon aria-hidden /></a>
+          <a href={backTo} aria-label="Back to top"><ArrowUpIcon aria-hidden /></a>
         </div>
         <div className="footer-imprint">
           <p>© {new Date().getFullYear()} {site.brand} Studio</p>

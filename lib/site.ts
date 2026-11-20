@@ -6,27 +6,31 @@ export const site = {
   brand: "Verdane",
   descriptor: "Jewellery Marketing Studio",
   tagline: "We make jewellery impossible to scroll past.",
-  // Your live domain, e.g. "https://verdane.studio". Used for share previews; leave "" until you have one.
-  url: "",
+  // Production origin for portfolio links and share previews.
+  url: "https://ml-jewelery.vercel.app",
   // International format, digits only (e.g. 919876543210).
-  whatsapp: "910000000000",
-  phone: "+91 00000 00000",
-  email: "hello@verdane.example",
+  whatsapp: "",
+  phone: "",
+  email: "",
   city: "Mumbai",
-  address: ["Studio 4, Heritage Arcade", "Zaveri Bazaar, Mumbai 400002"],
+  address: [] as string[],
   since: 2016,
   locale: "en-IN",
   // Leave a link empty ("") to hide it; no dead "#" links are shown.
   social: { instagram: "", behance: "", youtube: "", linkedin: "" },
   /**
    * Stats, client quotes and project results on this site are SAMPLES until you
-   * replace them with your own. While true, each one carries a visible "Sample" tag.
+   * replace them with your own. The public portfolio hides sample figures and quotes.
    * Set to false only once every figure and quote is real.
    */
   sampleContent: true,
 };
 
-export const waLink = (text: string) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+export const waLink = (text: string) => site.whatsapp
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
+  : "/start-a-project";
+
+export const briefChannel = site.whatsapp ? "WhatsApp" : site.email ? "email" : "download";
 
 /* --------------------------------------------------------------------------
    Portfolio: the photos turning around the hero pendant, and the work viewer.
@@ -179,7 +183,7 @@ export const stats = [
 ];
 
 export const process = [
-  { no: "01", title: "Brief & moodboard", line: "A 30 minute call, then a moodboard with lighting refs, props and shot list within 48 hours." },
+  { no: "01", title: "Brief & moodboard", line: "Agree on the lighting references, props and shot list before the first piece goes on set." },
   { no: "02", title: "Shoot", line: "Controlled macro studio for product, location and models for campaign. You can join live on video." },
   { no: "03", title: "Retouch & edit", line: "Dust, reflections and metal tones corrected by hand. Reels cut, coloured and sound designed in house." },
   { no: "04", title: "Launch & scale", line: "Assets cut for every placement, ads launched, and a weekly report on what is selling." },
@@ -192,19 +196,12 @@ export const testimonials = [
   { quote: "Our product pages finally show the stone's true colour. The 'is this the real colour?' calls have almost stopped.", name: "Client Name", detail: "Ecommerce Lead, Placeholder Diamonds" },
 ];
 
-/* --------------------------------------------------------------------------
-   FAQ. Anything in {{double braces}} is a fact only you can supply (prices,
-   timings, policies); it shows highlighted on the site until you replace it.
-   The FAQ schema for search engines is added once no {{placeholders}} remain.
-   -------------------------------------------------------------------------- */
 export const faq: { q: string; a: string }[] = [
-  { q: "How much does a jewellery shoot cost?", a: "Product photography starts at {{price per piece}}. Campaigns and reels are quoted per project after a 30 minute call, and every quote is itemised so you can see where the budget goes." },
-  { q: "How soon do we get the final photos?", a: "A standard product shoot is delivered in {{turnaround time}}. Campaigns take longer because of planning, models and locations, so you get a dated schedule with the quote." },
-  { q: "Do we send our jewellery to your studio?", a: "Either works. We shoot at our studio in " + site.city + " or at your store. {{How pieces are logged, insured and returned}}" },
-  { q: "Can you match our existing brand style?", a: "Yes. We start from your current catalogue and brand guidelines and share a moodboard for you to approve before anything is shot." },
-  { q: "Do you shoot on models?", a: "Yes. We cast and style models for on model and campaign shoots, and share options with you before the shoot. {{How model and styling fees are charged}}" },
-  { q: "Do you also run our Instagram and ads?", a: "Yes. Book a single service, or hand us content, posting and ads together as a monthly plan starting at {{monthly plan price}}." },
-  { q: "Who owns the photos and videos?", a: "Usage is set out in every quote. {{Your standard ownership and usage terms}}" },
-  { q: "What if we are not happy with the edits?", a: "{{Your revision policy, for example how many retouching rounds are included}}" },
+  { q: "How much does a jewellery shoot cost?", a: "Piece count, styling, retouching and the number of final images shape the quote. Include those details and your budget range in the project brief." },
+  { q: "How soon can the images be ready?", a: "Add your launch date to the brief. The schedule depends on the pieces, the shot list and the retouching involved." },
+  { q: "Should we send the jewellery to the studio?", a: "Include your location in the brief. Agree the shoot location, collection and return arrangements with the studio before sending any pieces." },
+  { q: "Can you match our existing brand style?", a: "Yes. Include your current catalogue and visual guidelines so the moodboard can follow your colours, crops and lighting." },
+  { q: "Can the shoot include models?", a: "Yes. Specify which pieces need to be worn and how the images will be used, so model casting and styling can be included in the quote." },
+  { q: "Can we book social media or ads separately?", a: "Yes. Choose a single discipline in the brief, or describe the combination of content, posting and advertising you need." },
+  { q: "What usage and revisions are included?", a: "List your intended placements, usage period and review rounds in the brief. Confirm those details in the quote before the shoot." },
 ];
-
